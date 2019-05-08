@@ -1,0 +1,163 @@
+.card_wrap {
+    width: 223px;
+    height: 403px;
+    border: 1px solid #D0D0D1;
+    position: relative;
+    color: #fff;
+
+    .card_img_1 {
+        width: 221px;
+        height: 209px;
+        background-image: url('../../../../assets/historycard_bg_1.png');
+        background-size: 100% 100%;
+
+        .title {
+            position: absolute;
+            left: 15px;
+            top: 25px;
+            line-height: 16px;
+            padding-bottom: 3px;
+            border-bottom: 2px solid #fff;
+        }
+
+        .delete {
+            width: 41px;
+            height: 28px;
+            position: absolute;
+            right: 0;
+            top: 2px;
+            border-radius: 15px 0 0 15px;
+            background-color: #fff;
+            background-image: url('../../../../assets/delete.png');
+            background-repeat: no-repeat;
+            background-size: 16px 14px;
+            background-position: 14px 8px;
+            cursor: pointer;
+
+            &:hover {
+                background-image: url('../../../../assets/delete_hover.png');
+                cursor: pointer;
+            }
+        }
+
+        .scene {
+            height: 15px;
+            line-height: 15px;
+            position: absolute;
+            left: 13px;
+            top: 64px;
+
+            span {
+                font-size: 12px;
+            }
+        }
+
+        .task {
+            position: absolute;
+            left: 13px;
+            top: 95px;
+            width: 193px;
+            line-height: 18px;
+
+            span {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .card_img_2 {
+        .card_img_1;
+        background-image: url('../../../../assets/historycard_bg_2.png');
+    }
+
+    .card_img_3 {
+        .card_img_1;
+        background-image: url('../../../../assets/historycard_bg_3.png');
+    }
+
+    .card_img_4 {
+        .card_img_1;
+        background-image: url('../../../../assets/historycard_bg_4.png');
+    }
+
+    .card_img_5 {
+        .card_img_1;
+        background-image: url('../../../../assets/historycard_bg_5.png');
+    }
+
+    .head_img_1 {
+        width: 41px;
+        height: 41px;
+        border: 2px solid #368CFC;
+        border-radius: 50%;
+        position: absolute;
+        right: 11px;
+        top: 187px;
+        background-image: url('../../../../assets/head_img5.png');
+        background-size: 100% 100%;
+    }
+
+    .info {
+        color: #333;
+        line-height: 15px;
+        font-weight: 500;
+        height: 15px;
+        position: absolute;
+        left: 15px;
+        top: 238px;
+
+        span {
+            color: #E0E0E0;
+            margin: 0 15px;
+        }
+    }
+
+    .report {
+        color:#999;
+        line-height: 12px;
+        font-size: 12px;
+        position: absolute;
+        left: 15px;
+        top: 267px;
+    }
+
+    .level {
+        .report;
+        top: 289px;
+        display: flex;
+    }
+
+    .btn_history {
+        width: 90px;
+        height: 32px;
+        line-height: 28px;
+        font-size: 16px;
+        border: 1px solid #2487FF;
+        box-shadow:0px 4px 7px 0px rgba(19,20,20,0.1);
+        border-radius: 4px;
+        color: #6387FF;
+        text-align: center;
+        position: absolute;
+        left: 15px;
+        top: 348px;
+        cursor: pointer;
+    }
+
+    .btn_practice {
+        .btn_history;
+        left: 120px;
+    }
+}
+
+// 星星
+.star_fill {
+    width: 12px;
+    height: 12px;
+    background-image: url('../../../../assets/start_fill.png');
+    background-size: 100% 100%;
+}
+
+.star {
+    .star_fill;
+    background-image: url('../../../../assets/star.png');
+}
