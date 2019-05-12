@@ -1,0 +1,41 @@
+.header {
+    height: 45px;
+            line-height: 45px;
+            border-bottom: 3px solid #E9E9ED;
+
+            a {
+                color: #333;
+                font-size: 16px;
+
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 12px;
+                    height: 12px;
+                    background-image: url('../../../assets/back.png');
+                    background-size: 100% 100%;
+                    margin-right: 12px;
+                }
+            }
+}
+
+.content {
+
+    .divider {
+        width: 264px;
+        color: #666;
+        font-size: 16px;
+
+        &:before {
+            border-top: 1px solid #C4C6CF;
+        }
+
+        &:after {
+            border-top: 1px solid #C4C6CF;
+        }
+
+        :global(.ant-divider-inner-text) {
+            padding: 0 10px;
+        }
+    }
+}

@@ -1,0 +1,67 @@
+.card_wrap {
+    color: #333;
+    width: 280px;
+    height: 280px;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    margin-right: 25px;
+
+    .delete {
+        width: 20px;
+        height: 18px;
+        position: absolute;
+        left: 20px;
+        top: 17px;
+        background-image: url('../../../assets/delete.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+        &:hover {
+            background-image: url('../../../assets/delete_hover.png');
+            cursor: pointer;
+        }
+    }
+
+    .img {
+        width: 54px;
+        height: 54px;
+        position: absolute;
+        top: 34px;
+        left: 113px;
+        background-image: url('../../../assets/report_img1.png');
+        background-size: 100% 100%;
+    }
+
+    .score {
+        font-weight: bold;
+        font-size: 42px;
+        line-height: 42px;
+        position: absolute;
+        left: 96px;
+        top: 114px;
+    }
+
+    .date {
+        color: #849095;
+        font-size: 14px;
+        line-height: 14px;
+        position: absolute;
+        left: 67px;
+        top: 171px;
+    }
+
+    .my_btn {
+        position: absolute;
+        left: 107px;
+        top: 223px;
+        color: #5584FF;
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+// 防止每一行最后一个被挤下去
+.card_nomargin {
+    margin: 0 !important;
+}

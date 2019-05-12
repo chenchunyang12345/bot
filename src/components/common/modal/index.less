@@ -1,0 +1,42 @@
+:global(.my_modal) {
+
+    :global(.ant-modal) {
+        top: 194px;
+    }
+
+    .close {
+        position: absolute;
+        right: -20px;
+        top: -10px;
+        width: 28px;
+        height: 28px;
+        background-image: url('../../../assets/close.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+    }
+
+    :global(.ant-modal-footer) {
+        border: none;
+        padding: 0 80px 30px;
+        text-align: left;
+
+        button {
+            width: 92px;
+            height: 32px;
+
+            &:nth-child(2) {
+                margin-left: 16px;
+            }
+        }
+
+        :global(.ant-btn-danger) {
+            border-color: #D0021B;
+            background-color: #D0021B;
+            color: white;
+
+            &:hover {
+                border-color: #D0021B;
+            }
+        }
+    }
+}

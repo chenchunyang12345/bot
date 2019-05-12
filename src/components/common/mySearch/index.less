@@ -1,0 +1,28 @@
+.content {
+    display: flex;
+
+    :global(.ant-input) {
+        border-radius: 5px 0 0 5px;
+
+        &:hover {
+            border-color: #D9D9D9;
+        }
+
+        &:focus {
+            border-color: #D9D9D9;
+            box-shadow: none;
+        }
+    }
+
+    .icon {
+        width: 39px;
+        height: 32px;
+        border: 1px solid #D9D9D9;
+        border-radius: 0 5px 5px 0;
+        margin-left: -2px;
+        background-image: url('../../../assets/search.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
+    }
+}

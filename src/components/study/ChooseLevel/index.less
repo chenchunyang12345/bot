@@ -1,0 +1,39 @@
+.content {
+    width: 1200px;
+    height: 65px;
+    background-color: #fff;
+    padding-left: 14px;
+    display: flex;
+    align-items: center;
+
+    .level_wrap {
+        width: 62px;
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('../../../assets/level.png');
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .choose {
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('../../../assets/level_choose.png');
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+}

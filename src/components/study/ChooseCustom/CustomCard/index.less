@@ -1,0 +1,66 @@
+.card {
+    width: 284px;
+    height: 292px;
+    border: 1px solid #DCDCE0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-left: 12px;
+    margin-bottom: 20px;
+    position: relative;
+
+    .bg_img {
+        width: 284px;
+        height: 200px;
+        background-image: url('../../../../assets/custom_bg1.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    .head_img {
+        width: 42px;
+        height: 42px;
+        border: 2px solid #2487FF;
+        border-radius: 50%;
+        background-image: url('../../../../assets/head_img5.png');
+        background-size: 100% 100%;
+        position: absolute;
+        right: 14px;
+        top: 178px;
+    }
+
+    .name {
+        color: #333;
+        line-height: 20px;
+        position: absolute;
+        left: 18px;
+        top: 222px;
+        font-weight: 500;
+    }
+
+    .detail {
+        color: #666;
+        line-height: 14px;
+        position: absolute;
+        left: 19px;
+        top: 253px;
+
+        span {
+            padding: 0 15px;
+            color: #E0E0E0;
+        }
+    }
+
+    .delete {
+        width: 20px;
+        height: 18px;
+        position: absolute;
+        right: 25px;
+        bottom: 24px;
+        background-image: url('../../../../assets/delete.png');
+        background-size: 100% 100%;
+
+        &:hover {
+            background-image: url('../../../../assets/delete_hover.png');
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.content {
+    width: 1200px;
+    height: 374px;
+    background-color: #fff;
+
+    .tabs {
+        height: 54px;
+        display: flex;
+        padding-left: 14px;
+        margin-bottom: 10px;
+        
+        .items {
+            padding: 0 16px;
+            line-height: 54px;
+            cursor: pointer;
+        }
+        
+        .choose {
+            color: #5584FF;
+            border-bottom: 4px solid #5584FF;
+        }
+    }
+
+    .detail {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 2px;
+    }
+}
+
+.change_page {
+
+    :global(.ant-pagination) {
+        text-align: right;
+        margin-top: 15px;
+    }
+}

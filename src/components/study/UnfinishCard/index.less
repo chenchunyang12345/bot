@@ -1,0 +1,62 @@
+.card_wrap {
+    color: #849095;
+    width: 280px;
+    height: 280px;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    margin-right: 25px;
+
+    .delete {
+        width: 20px;
+        height: 18px;
+        position: absolute;
+        left: 20px;
+        top: 17px;
+        background-image: url('../../../assets/delete.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+        &:hover {
+            background-image: url('../../../assets/delete_hover.png');
+            cursor: pointer;
+        }
+    }
+
+    .img {
+        width: 85px;
+        height: 85px;
+        position: absolute;
+        left: 98px;
+        top: 45px;
+        background-image: url('../../../assets/unfinish_img1.png');
+        background-size: 100% 100%;
+    }
+
+    .date {
+        font-size: 14px;
+        line-height: 14px;
+        position: absolute;
+        left: 67px;
+        top: 150px;
+    }
+
+    .continue_btn {
+        width: 54px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        position: absolute;
+        left: 113px;
+        top: 239px;
+        text-align: center;
+        background-color: #5584FF;
+        border-radius: 5px;
+        color: #fff;
+    }
+}
+
+// 防止每一行最后一个被挤下去
+.card_nomargin {
+    margin: 0 !important;
+}
