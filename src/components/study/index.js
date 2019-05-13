@@ -8,6 +8,7 @@ import AnsMsg from './AnsMsg';
 import ChooseCustom from './ChooseCustom';
 import ChooseScene from './ChooseScene';
 import ChooseLevel from './ChooseLevel';
+import CheckTalk from './CheckTalk';
 
 export {
     CarouselBot,
@@ -20,4 +21,5 @@ export {
     ChooseCustom,
     ChooseScene,
     ChooseLevel,
+    CheckTalk,
 }

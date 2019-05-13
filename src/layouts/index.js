@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Menu } from 'antd';
 import styles from './index.less';
+import { connect } from 'dva';
+
+import { Menu } from 'antd';
 
 class BasicLayout extends Component {
     constructor(props) {
@@ -8,6 +10,7 @@ class BasicLayout extends Component {
     }
 
     render() {
+        let { current, handleClick } = this.props;
         return (
             <div className={styles.wrap_page}>
                 <div className={styles.header}>
@@ -17,28 +20,30 @@ class BasicLayout extends Component {
                         </div>
                         <div className={styles.nav}>
                             <Menu
+                                onClick={e => handleClick(e.key)}
+                                selectedKeys={[current]}
                                 mode="horizontal"
                             >
-                                <Menu.Item>
-                                    <a href="/#/">首页</a>
+                                <Menu.Item key="home">
+                                    <a href="/#/home">首页</a>
                                 </Menu.Item>
-                                <Menu.Item>
-                                    <a href="/#/study">客户</a>
+                                <Menu.Item key="customer">
+                                    <a href="/#/customer">客户</a>
                                 </Menu.Item>
-                                <Menu.Item>
-                                    <a href="/#/study">销售</a>
+                                <Menu.Item key="sale">
+                                    <a href="/#/sale">销售</a>
                                 </Menu.Item>
-                                <Menu.Item>
+                                <Menu.Item key="study">
                                     <a href="/#/study">学习</a>
                                 </Menu.Item>
-                                <Menu.Item>
-                                    <a href="/#/study">个人</a>
+                                <Menu.Item key="personal">
+                                    <a href="/#/personal">个人</a>
+                                </Menu.Item>
+                                <Menu.Item key="help">
+                                    <a href="/#/help">帮助</a>
                                 </Menu.Item>
                                 <Menu.Item>
-                                    <a href="/#/study">帮助</a>
-                                </Menu.Item>
-                                <Menu.Item>
-                                    <a href="/#/study">登录</a>
+                                    <a href="/#/logo">登录</a>
                                 </Menu.Item>
                             </Menu>
                             <div className={styles.message}></div>
@@ -57,4 +62,19 @@ class BasicLayout extends Component {
   }
 }
 
-export default BasicLayout;
+function mapStateToProps({ menu }) {
+    return {...menu};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        handleClick: (key) => {
+            dispatch({
+                type: 'menu/handleClick',
+                payload: key
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasicLayout);

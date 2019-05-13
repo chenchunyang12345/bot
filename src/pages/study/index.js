@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.less';
+import { connect } from 'dva';
 
 import { Breadcrumb, Icon } from 'antd';
 
@@ -46,4 +47,9 @@ class Study extends Component {
   }
 }
 
-export default Study;
+function mapStateToProps({study, loading}) {
+    console.log({...study, loading})
+    return {...study, loading};
+}
+
+export default connect(mapStateToProps)(Study);

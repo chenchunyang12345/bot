@@ -40,7 +40,7 @@ class ChooseCustom extends Component {
                         {/* 新建客户的信息modal框 */}
                         <NewCustomer visible={visible}></NewCustomer>
                         {/* 真实客户的信息modal框 */}
-                        <RealCustomer></RealCustomer>
+                        {/* <RealCustomer></RealCustomer> */}
                     </div>
                     <div className={styles.detail}>
                         <CustomCard></CustomCard>
