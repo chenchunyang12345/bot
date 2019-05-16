@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Carousel } from 'antd';
-
 import styles from './index.less';
+import { connect } from 'dva';
+
+import { Carousel, Spin } from 'antd';
 
 // 难度指数的组件
 const LevelStar = (props) => {
@@ -32,169 +33,186 @@ class CarouselBot extends Component {
     }
 
     render() {
-        return (
-            <div className={styles.carousel_container}>
-                <Carousel 
-                    dots={false}
-                    // autoplay={true}
-                    ref={el => {this.changeIndex = el}}
-                >
-                    <div className={styles.card_wrap}>
-                        <div className={styles.cardOne_1}>
-                            <div className={styles.name_1}>虚拟小男</div>
-                            <div className={styles.head_img_1}></div>
-                            <div className={styles.sex_age_1}>男&nbsp;/&nbsp;<span>23岁</span></div>
-                            <div className={styles.scene_1}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_1}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+        let { recommend_list } = this.props;
+        // 暂时填补一下
+        recommend_list = recommend_list.concat([recommend_list[0], recommend_list[1], recommend_list[2]]);
+        // list里面的渲染顺序是，数组第一个在第一页第一个，数组第二个在第二页第一个，数组第三、四、五个分别在每页的最后一个，后面其他的依次渲染
+        console.log(recommend_list)
+        if( recommend_list[0] ) {
+            return (
+                <div className={styles.carousel_container}>
+                    <Carousel 
+                        dots={false}
+                        // autoplay={true}
+                        ref={el => {this.changeIndex = el}}
+                    >
+                        <div className={styles.card_wrap}>
+                            <div className={styles.cardOne_1}>
+                                <div className={styles.name_1}>{recommend_list[0].customer.username}</div>
+                                <div className={styles.head_img_1}></div>
+                                <div className={styles.sex_age_1}>{recommend_list[0].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[0].customer.age}岁</span></div>
+                                <div className={styles.scene_1}>场景：<span>{recommend_list[0].scene.name}</span></div>
+                                <div className={styles.task_1}>
+                                    任务：
+                                    <span>{recommend_list[0].scene.task}</span>
+                                </div>
+                                <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[0].level}/></div>
+                                <a className={styles.start_1} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_1}>难度指数：<LevelStar level={1}/></div>
-                            <div className={styles.start_1}>开始</div>
-                        </div>
-                        <div className={styles.cardOne_2}>
-                            <div className={styles.name_2}>虚拟小女</div>
-                            <div className={styles.head_img_2}></div>
-                            <div className={styles.sex_age_2}>女&nbsp;/&nbsp;<span>22岁</span></div>
-                            <div className={styles.scene_2}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_2}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardOne_2}>
+                                <div className={styles.name_2}>{recommend_list[5].customer.username}</div>
+                                <div className={styles.head_img_2}></div>
+                                <div className={styles.sex_age_2}>{recommend_list[5].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[5].customer.age}岁</span></div>
+                                <div className={styles.scene_2}>场景：<span>{recommend_list[5].scene.name}</span></div>
+                                <div className={styles.task_2}>
+                                    任务：
+                                    <span>{recommend_list[5].scene.task}</span>
+                                </div>
+                                <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[5].level}/></div>
+                                <a className={styles.start_2} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_2}>难度指数：<LevelStar level={1}/></div>
-                            <div className={styles.start_2}>开始</div>
-                        </div>
-                        <div className={styles.cardOne_3}>
-                            <div className={styles.name_3}>真实小男</div>
-                            <div className={styles.head_img_3}></div>
-                            <div className={styles.sex_age_3}>男&nbsp;/&nbsp;<span>32岁</span></div>
-                            <div className={styles.scene_3}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_3}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己>成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardOne_3}>
+                                <div className={styles.name_3}>{recommend_list[6].customer.username}</div>
+                                <div className={styles.head_img_3}></div>
+                                <div className={styles.sex_age_3}>{recommend_list[6].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[6].customer.age}岁</span></div>
+                                <div className={styles.scene_3}>场景：<span>{recommend_list[6].scene.name}</span></div>
+                                <div className={styles.task_3}>
+                                    任务：
+                                    <span>{recommend_list[6].scene.task}</span>
+                                </div>
+                                <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[6].level}/></div>
+                                <a className={styles.start_3} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_3}>难度指数：<LevelStar level={1}/></div>
-                            <div className={styles.start_3}>开始</div>
-                        </div>
-                        <div className={styles.cardOne_4}>
-                            <div className={styles.name_4}>真实小女</div>
-                            <div className={styles.head_img_4}></div>
-                            <div className={styles.sex_age_4}>女&nbsp;/&nbsp;<span>43岁</span></div>
-                            <div className={styles.scene_4}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_4}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardOne_4}>
+                                <div className={styles.name_4}>{recommend_list[2].customer.username}</div>
+                                <div className={styles.head_img_4}></div>
+                                <div className={styles.sex_age_4}>{recommend_list[2].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[2].customer.age}岁</span></div>
+                                <div className={styles.scene_4}>场景：<span>{recommend_list[2].scene.name}</span></div>
+                                <div className={styles.task_4}>
+                                    任务：
+                                    <span>{recommend_list[2].scene.task}</span>
+                                </div>
+                                <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[2].level}/></div>
+                                <a className={styles.start_4} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_4}>难度指数：<LevelStar level={1}/></div>
-                            <div className={styles.start_4}>开始</div>
                         </div>
-                    </div>
-                    <div className={styles.card_wrap}>
-                        <div className={styles.cardTwo_1}>
-                            <div className={styles.name_1}>虚拟小男</div>
-                            <div className={styles.head_img_1}></div>
-                            <div className={styles.sex_age_1}>男&nbsp;/&nbsp;<span>23岁</span></div>
-                            <div className={styles.scene_1}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_1}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+                        <div className={styles.card_wrap}>
+                            <div className={styles.cardTwo_1}>
+                                <div className={styles.name_1}>{recommend_list[1].customer.username}</div>
+                                <div className={styles.head_img_1}></div>
+                                <div className={styles.sex_age_1}>{recommend_list[1].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[1].customer.age}岁</span></div>
+                                <div className={styles.scene_1}>场景：<span>{recommend_list[1].scene.name}</span></div>
+                                <div className={styles.task_1}>
+                                    任务：
+                                    <span>{recommend_list[1].scene.task}</span>
+                                </div>
+                                <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[1].level}/></div>
+                                <a className={styles.start_1} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_1}>难度指数：</div>
-                            <div className={styles.start_1}>开始</div>
-                        </div>
-                        <div className={styles.cardTwo_2}>
-                            <div className={styles.name_2}>虚拟小女</div>
-                            <div className={styles.head_img_2}></div>
-                            <div className={styles.sex_age_2}>女&nbsp;/&nbsp;<span>22岁</span></div>
-                            <div className={styles.scene_2}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_2}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardTwo_2}>
+                                <div className={styles.name_2}>{recommend_list[7].customer.username}</div>
+                                <div className={styles.head_img_2}></div>
+                                <div className={styles.sex_age_2}>{recommend_list[7].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[7].customer.age}岁</span></div>
+                                <div className={styles.scene_2}>场景：<span>{recommend_list[7].scene.name}</span></div>
+                                <div className={styles.task_2}>
+                                    任务：
+                                    <span>{recommend_list[7].scene.task}</span>
+                                </div>
+                                <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[7].level}/></div>
+                                <a className={styles.start_2} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_2}>难度指数：</div>
-                            <div className={styles.start_2}>开始</div>
-                        </div>
-                        <div className={styles.cardTwo_3}>
-                            <div className={styles.name_3}>真实小男</div>
-                            <div className={styles.head_img_3}></div>
-                            <div className={styles.sex_age_3}>男&nbsp;/&nbsp;<span>32岁</span></div>
-                            <div className={styles.scene_3}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_3}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己>成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardTwo_3}>
+                                <div className={styles.name_3}>{recommend_list[8].customer.username}</div>
+                                <div className={styles.head_img_3}></div>
+                                <div className={styles.sex_age_3}>{recommend_list[8].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[8].customer.age}岁</span></div>
+                                <div className={styles.scene_3}>场景：<span>{recommend_list[8].scene.name}</span></div>
+                                <div className={styles.task_3}>
+                                    任务：
+                                    <span>{recommend_list[8].scene.task}</span>
+                                </div>
+                                <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[8].level}/></div>
+                                <a className={styles.start_3} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_3}>难度指数：</div>
-                            <div className={styles.start_3}>开始</div>
-                        </div>
-                        <div className={styles.cardTwo_4}>
-                            <div className={styles.name_4}>真实小女</div>
-                            <div className={styles.head_img_4}></div>
-                            <div className={styles.sex_age_4}>女&nbsp;/&nbsp;<span>43岁</span></div>
-                            <div className={styles.scene_4}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_4}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardTwo_4}>
+                                <div className={styles.name_4}>{recommend_list[3].customer.username}</div>
+                                <div className={styles.head_img_4}></div>
+                                <div className={styles.sex_age_4}>{recommend_list[3].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[3].customer.age}岁</span></div>
+                                <div className={styles.scene_4}>场景：<span>{recommend_list[3].scene.name}</span></div>
+                                <div className={styles.task_4}>
+                                    任务：
+                                    <span>{recommend_list[3].scene.task}</span>
+                                </div>
+                                <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[3].level}/></div>
+                                <a className={styles.start_4} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_4}>难度指数：</div>
-                            <div className={styles.start_4}>开始</div>
                         </div>
-                    </div>
-                    <div className={styles.card_wrap}>
-                        <div className={styles.cardThree_1}>
-                            <div className={styles.name_1}>虚拟小男</div>
-                            <div className={styles.head_img_1}></div>
-                            <div className={styles.sex_age_1}>男&nbsp;/&nbsp;<span>23岁</span></div>
-                            <div className={styles.scene_1}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_1}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+                        <div className={styles.card_wrap}>
+                            <div className={styles.cardThree_1}>
+                                <div className={styles.name_1}>{recommend_list[9].customer.username}</div>
+                                <div className={styles.head_img_1}></div>
+                                <div className={styles.sex_age_1}>{recommend_list[9].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[9].customer.age}岁</span></div>
+                                <div className={styles.scene_1}>场景：<span>{recommend_list[9].scene.name}</span></div>
+                                <div className={styles.task_1}>
+                                    任务：
+                                    <span>{recommend_list[9].scene.task}</span>
+                                </div>
+                                <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[9].level}/></div>
+                                <a className={styles.start_1} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_1}>难度指数：</div>
-                            <div className={styles.start_1}>开始</div>
-                        </div>
-                        <div className={styles.cardThree_2}>
-                            <div className={styles.name_2}>虚拟小女</div>
-                            <div className={styles.head_img_2}></div>
-                            <div className={styles.sex_age_2}>女&nbsp;/&nbsp;<span>22岁</span></div>
-                            <div className={styles.scene_2}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_2}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardThree_2}>
+                                <div className={styles.name_2}>{recommend_list[10].customer.username}</div>
+                                <div className={styles.head_img_2}></div>
+                                <div className={styles.sex_age_2}>{recommend_list[10].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[10].customer.age}岁</span></div>
+                                <div className={styles.scene_2}>场景：<span>{recommend_list[10].scene.name}</span></div>
+                                <div className={styles.task_2}>
+                                    任务：
+                                    <span>{recommend_list[10].scene.task}</span>
+                                </div>
+                                <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[10].level}/></div>
+                                <a className={styles.start_2} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_2}>难度指数：</div>
-                            <div className={styles.start_2}>开始</div>
-                        </div>
-                        <div className={styles.cardThree_3}>
-                            <div className={styles.name_3}>真实小男</div>
-                            <div className={styles.head_img_3}></div>
-                            <div className={styles.sex_age_3}>男&nbsp;/&nbsp;<span>32岁</span></div>
-                            <div className={styles.scene_3}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_3}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己>成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardThree_3}>
+                                <div className={styles.name_3}>{recommend_list[11].customer.username}</div>
+                                <div className={styles.head_img_3}></div>
+                                <div className={styles.sex_age_3}>{recommend_list[11].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[11].customer.age}岁</span></div>
+                                <div className={styles.scene_3}>场景：<span>{recommend_list[11].scene.name}</span></div>
+                                <div className={styles.task_3}>
+                                    任务：
+                                    <span>{recommend_list[11].scene.task}</span>
+                                </div>
+                                <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[11].level}/></div>
+                                <a className={styles.start_3} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_3}>难度指数：</div>
-                            <div className={styles.start_3}>开始</div>
-                        </div>
-                        <div className={styles.cardThree_4}>
-                            <div className={styles.name_4}>真实小女</div>
-                            <div className={styles.head_img_4}></div>
-                            <div className={styles.sex_age_4}>女&nbsp;/&nbsp;<span>43岁</span></div>
-                            <div className={styles.scene_4}>场景：<span>电话邀约---转介绍--接洽</span></div>
-                            <div className={styles.task_4}>
-                                任务：
-                                <span>成功确认对方身份，介绍自己。成功确认对方身份，介绍自己，确认对方是否...</span>
+                            <div className={styles.cardThree_4}>
+                                <div className={styles.name_4}>{recommend_list[4].customer.username}</div>
+                                <div className={styles.head_img_4}></div>
+                                <div className={styles.sex_age_4}>{recommend_list[4].customer.gender}&nbsp;/&nbsp;<span>{recommend_list[4].customer.age}岁</span></div>
+                                <div className={styles.scene_4}>场景：<span>{recommend_list[4].scene.name}</span></div>
+                                <div className={styles.task_4}>
+                                    任务：
+                                    <span>{recommend_list[4].scene.task}</span>
+                                </div>
+                                <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[4].level}/></div>
+                                <a className={styles.start_4} href='/#/study/dm'>开始</a>
                             </div>
-                            <div className={styles.level_4}>难度指数：</div>
-                            <div className={styles.start_4}>开始</div>
                         </div>
-                    </div>
-                </Carousel>
-                <div className={styles.left_btn} onClick={() => this.prevPage()}>&lt;</div>
-                <div className={styles.right_btn} onClick={() => this.nextPage()}>&gt;</div>
-            </div>
-        )
+                    </Carousel>
+                    <div className={styles.left_btn} onClick={() => this.prevPage()}>&lt;</div>
+                    <div className={styles.right_btn} onClick={() => this.nextPage()}>&gt;</div>
+                </div>
+            )
+        } else {
+            return (
+                <Spin delay={500} tip='loading...'>
+                    <div style={{width: '1200px', height: '400px', backgroundColor: '#eee'}}></div>
+                </Spin>
+            )
+        }
   }
 }
 
-export default CarouselBot;
+function mapStateToProps({ study }) {
+    return {...study};
+}
+
+export default connect(mapStateToProps)(CarouselBot);

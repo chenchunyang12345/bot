@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 
-import { Input, Icon } from 'antd';
+import { Input } from 'antd';
 
 class MySearch extends Component {
     constructor(props) {
@@ -9,11 +9,11 @@ class MySearch extends Component {
     }
 
     render() {
-        let { ...props } = this.props;
+        let { handleSearch, ...props } = this.props;
         return (
             <div className={styles.content}>
                 <Input {...props}></Input>
-                <div className={styles.icon}></div>
+                <div className={styles.icon} onClick={() => handleSearch()}></div>
             </div>
         )
   }

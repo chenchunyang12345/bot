@@ -17,6 +17,7 @@ class ChooseCustom extends Component {
         this.state = {
             visible_new: false,
             visible_real: false,
+            search_name: '',
         }
         this.closeModal = this.closeModal.bind(this);
         this.jumpReal = this.jumpReal.bind(this);
@@ -38,18 +39,87 @@ class ChooseCustom extends Component {
         })
     }
 
+    // 渲染卡片
+    renderCard() {
+        let { customers_list } = this.props;
+        return customers_list.map((customer, idx) => {
+            return <CustomCard 
+                        key={idx}
+                        detail={customer}
+                    />
+        })
+    }
+
+    // 改变页码
+    changePage(page) {
+        let { customers_searchname, customers_type } = this.props;
+        this.props.dispatch({
+            type: 'study_customize/getCustomers',
+            payload: {
+                username: customers_searchname,
+                type: customers_type,
+            },
+            pagination: {
+                current: page,
+                pageSize: 8,
+            }
+        })
+    }
+
+    // 搜索客户类型
+    searchType(value) {
+        let { customers_searchname } = this.props;
+        this.props.dispatch({
+            type: 'study_customize/getCustomers',
+            payload: {
+                username: customers_searchname,
+                type: value,
+            },
+            pagination: {
+                current: 1,
+                pageSize: 8,
+            }
+        })
+    }
+
+    handleSearch() {
+        let { search_name } = this.state;
+        let { customers_type } = this.props;
+        this.props.dispatch({
+            type: 'study_customize/getCustomers',
+            payload: {
+                username: search_name,
+                type: customers_type,
+            },
+            pagination: {
+                current: 1,
+                pageSize: 8,
+            }
+        })
+    }
+
     render() {
-        let { visible_new, visible_real } = this.state;
+        let { visible_new, visible_real, search_name } = this.state;
+        let { customers_total, customers_current, customers_size } = this.props;
         return (
             <div>
                 <div className={styles.content}>
                     <div className={styles.top}>
-                        <Select defaultValue="全部客户" style={{ width: 120, marginLeft: '14px', marginRight: '11px'}}>
-                            <Option value="全部客户">全部客户</Option>
-                            <Option value="真实客户">真实客户</Option>
-                            <Option value="虚拟客户">虚拟客户</Option>
+                        <Select
+                            defaultValue="-1" 
+                            onChange={value => this.searchType(value)}
+                            style={{ width: 120, marginLeft: '14px', marginRight: '11px'}}
+                        >
+                            <Option value="-1">全部客户</Option>
+                            <Option value="0">真实客户</Option>
+                            <Option value="1">虚拟客户</Option>
                         </Select>
-                        <MySearch placeholder="标题／作者／摘要"></MySearch>
+                        <MySearch 
+                            placeholder="标题／作者／摘要"
+                            value={search_name} 
+                            onChange={e => this.setState({search_name: e.target.value})}
+                            handleSearch={() => this.handleSearch()}
+                        />
                         <Button
                             style={{width: '120px', fontSize: '12px', marginLeft: '20px'}} 
                             type={'primary'}
@@ -68,17 +138,18 @@ class ChooseCustom extends Component {
                         ></RealCustomer>
                     </div>
                     <div className={styles.detail}>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
-                        <CustomCard></CustomCard>
+                        {
+                            this.renderCard()
+                        }
                     </div>
                 </div>
                 <div className={styles.change_page}>
-                    <Pagination></Pagination>
+                    <Pagination 
+                        current={customers_current}
+                        pageSize={customers_size}
+                        total={customers_total}
+                        onChange={page => this.changePage(page)}
+                    />
                 </div>
             </div>
         )

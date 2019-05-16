@@ -6,26 +6,81 @@ export default {
     state: {
         // 选择场景相关
         scene_type: [],
+        scene_chooseType: '',
         scene_current: 1,
         scene_size: 4,
-        scene_total: 0,
-        scene_list: [{id:1, name: '1212', task: '12121212121'}],
+        scene_total: 10,
+        scene_list: [],
+        // 选择客户相关
+        customers_total: 0,
+        customers_current: 1,
+        customers_size: 8,
+        customers_list: [],
+        customers_searchname: '',
+        customers_type: -1,
+        // 选择id值和难度
+        customers_id: -1,
+        scene_id: -1,
+        level: 1,
     },
     reducers: {
         setSceneType(state, { payload: scene_type }) {
-            return {...state, scene_type};
+            return { ...state, scene_type };
         },
         setSceneTotal(state, { payload: scene_total }) {
-            return {...state, scene_total};
+            return { ...state, scene_total };
+        },
+        setSceneCurrent(state, { payload: scene_current }) {
+            return { ...state, scene_current };
+        },
+        setSceneList(state, { payload: scene_list }) {
+            return { ...state, scene_list };
+        },
+        setCustomersTotal(state, { payload: customers_total }) {
+            return { ...state, customers_total };
+        },
+        setCustomersCurrent(state, { payload: customers_current }) {
+            return { ...state, customers_current };
+        },
+        setCustomersList(state, { payload: customers_list }) {
+            return { ...state, customers_list };
+        },
+        setCustomersName(state, { payload: customers_searchname }) {
+            return { ...state, customers_searchname };
+        },
+        setCustomersType(state, { payload: customers_type }) {
+            return { ...state, customers_type };
+        },
+        deleteSomeCustomer(state, { payload: id }) {
+            let newList = state.customers_list.filter(customer => customer.id !== id);
+            return { ...state, customers_list: newList };
+        },
+        // 改变id
+        setCustomersId(state, { payload: customers_id }) {
+            return { ...state, customers_id };
+        },
+        setSceneId(state, { payload: scene_id }) {
+            return { ...state, scene_id };
+        },
+        setLevel(state, { payload: level }) {
+            return { ...state, level };
         }
     },
     effects: {
-        *getCustomers({ serviceName, payload, pagination, resolve, reject }, { call }) {
-            const res = yield call(services.study_customize[serviceName], { payload, pagination });
+        *getCustomers({ payload, pagination }, { call, put }) {
+            const res = yield call(services.study_customize['getCustomers'], { payload, pagination });
+            const searchName = payload.username;
+            const type = payload.type;
             if(res.err) {
-                reject('获取虚拟客户列表失败');
+                message.error('获取客户列表失败', 2);
             } else {
-                resolve(res);
+                yield put({ type: 'setCustomersTotal', payload: res.headers.count });
+                yield put({ type: 'setCustomersList', payload: res.data.msg });
+                yield put({ type: 'setCustomersCurrent', payload: pagination.current });
+                yield put({ type: 'setCustomersName', payload: searchName });
+                yield put({ type: 'setCustomersType', payload: type });
+                // 重置选择id
+                yield put({ type: 'setCustomersId', payload: -1 });
             }
         },
         *getRealCustomers({ serviceName, resolve, reject }, { call }) {
@@ -52,6 +107,10 @@ export default {
                 message.error('获取场景列表失败', 2);
             } else {
                 yield put({ type: 'setSceneTotal', payload: res.headers.count });
+                yield put({ type: 'setSceneCurrent', payload: pagination.current });
+                yield put({ type: 'setSceneList', payload: res.data.msg });
+                // 重置
+                yield put({ type: 'setSceneId', payload: -1 });
             }
         },
         *createCustomer({ serviceName, payload, resolve, reject }, { call }) {
@@ -62,30 +121,43 @@ export default {
                 resolve(res);
             }
         },
-        *deleteCustomer({ serviceName, id, resolve, reject }, { call }) {
-            const res = yield call(services.study_customize[serviceName], { id });
+        *deleteCustomer({ id, resolve }, { call, put }) {
+            const res = yield call(services.study_customize['deleteCustomer'], { id });
             if(res.err) {
-                reject('删除虚拟客户失败');
+                message.error('删除虚拟客户失败', 2);
             } else {
-                resolve(res);
+                resolve();
+                yield put({ type: 'deleteSomeCustomer', payload: id });
+                yield put({ type: 'setCustomersId', payload: -1 });
             }
         },
-        *createCustomize({ serviceName, payload, resolve, reject }, { call }) {
-            const res = yield call(services.study_customize[serviceName], { payload });
+        *createCustomize({ payload, resolve }, { call }) {
+            const res = yield call(services.study_customize['createCustomize'], { payload });
             if(res.err) {
-                reject('创建自定义练习失败');
+                message.error('创建自定义练习失败', 2);
             } else {
-                resolve(res);
+                resolve(res.data.msg);
             }
-        }
+        },
     },
     subscriptions: {
         setup({ dispatch, history }) {
             history.listen(location => {
                 if(location.pathname === '/study/customize') {
                     dispatch({
+                        type: 'getCustomers',
+                        payload: {
+                            username: '',
+                            type: -1,
+                        },
+                        pagination: {
+                            current: 1,
+                            pageSize: 8,
+                        }
+                    });
+                    dispatch({
                         type: 'getSceneTypes',
-                    })
+                    });
                 }
             })
         }

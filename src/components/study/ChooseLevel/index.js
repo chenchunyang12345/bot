@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.less';
+import { connect } from 'dva';
 
 import classnames from 'classnames';
 
@@ -11,28 +12,29 @@ const LEVELS = [
 ]
 
 class ChooseCustom extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            practice_level: 1,
-        }
+
+    changeLevel(lv) {
+        this.props.dispatch({
+            type: 'study_customize/setLevel',
+            payload: lv,
+        })
     }
 
     render() {
-        let { practice_level } = this.state;
+        let { level } = this.props;
         return (
             <div className={styles.content}>
                 {
-                    LEVELS.map((level, idx) => {
+                    LEVELS.map((item, idx) => {
                         return (
                             <div className={classnames({
                                 [styles.level_wrap]: true,
-                                [styles.choose]: practice_level === idx + 1 ? true : false,
+                                [styles.choose]: level === idx + 1 ? true : false,
                             })}
-                                // onClick={}
+                                onClick={() => this.changeLevel(idx + 1)}
                                 key={idx}    
                             >
-                                {level}
+                                {item}
                             </div>
                         )
                     })
@@ -42,4 +44,8 @@ class ChooseCustom extends Component {
   }
 }
 
-export default ChooseCustom;
+function mapStateToProps({ study_customize }) {
+    return { ...study_customize };
+}
+
+export default connect(mapStateToProps)(ChooseCustom);

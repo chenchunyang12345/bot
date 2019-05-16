@@ -197,8 +197,8 @@
 
             .content_bottom {
                 padding-left: 29px;
+                padding-bottom: 20px;
                 width: 1200px;
-                height: 294px;
                 background-color: #fff;
 
                 .hello {
@@ -216,6 +216,13 @@
                     display: flex;
                     margin-top: 20px;
                     height: 26px;
+
+                    :global(.ant-tag) {
+                        width: 81px;
+                        text-align: center;
+                        line-height: 24px;
+                        font-size: 14px;
+                    }
                 }
             }
         }

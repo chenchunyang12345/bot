@@ -5,8 +5,7 @@ import { connect } from 'dva';
 import { Breadcrumb, Icon } from 'antd';
 
 // 引入卡片的轮播组件
-import { CarouselBot } from '../../components/study';
-import { HistoryCard } from '../../components/study';
+import { CarouselBot, HistoryCard } from '../../components/study';
 
 class Study extends Component {
     constructor(props) {
@@ -47,8 +46,8 @@ class Study extends Component {
   }
 }
 
-function mapStateToProps({study, loading}) {
-    return {...study, loading};
+function mapStateToProps({ study }) {
+    return {...study};
 }
 
 export default connect(mapStateToProps)(Study);

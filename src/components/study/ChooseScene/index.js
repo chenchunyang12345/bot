@@ -20,13 +20,13 @@ class ChooseScene extends Component {
         let { scene_type } = this.props;
         return scene_type.map((scene, idx) => {
             return (
-                <div 
+                <div
                     key={idx}
                     className={classnames({
                         [styles.items]: true,
                         [styles.choose]: choose_tab === idx + 1 ? true : false
                     })} 
-                    onClick={() => this.setState({choose_tab: idx + 1})}
+                    onClick={() => this.changeType(idx)}
                 >{scene}</div>
             )
         })
@@ -42,8 +42,40 @@ class ChooseScene extends Component {
         })
     }
 
+    // 改变页码
+    changePage(page) {
+        let { choose_tab } = this.state;
+        let { scene_type } = this.props;
+        this.props.dispatch({
+            type: 'study_customize/getSceneList',
+            payload: {
+                type: `${scene_type[choose_tab - 1]}`,
+            },
+            pagination: {
+                current: page,
+                pageSize: 4,
+            },
+        })
+    }
+
+    // 改变类别
+    changeType(idx) {
+        let { scene_type } = this.props;
+        let choose_tab = idx + 1;
+        this.props.dispatch({
+            type: 'study_customize/getSceneList',
+            payload: {
+                type: `${scene_type[choose_tab - 1]}`,
+            },
+            pagination: {
+                current: 1,
+                pageSize: 4,
+            },
+        })
+        this.setState({ choose_tab });
+    }
+
     render() {
-        console.log(this.props)
         let { scene_total, scene_size, scene_current } = this.props;
         return (
             <div>
@@ -63,8 +95,8 @@ class ChooseScene extends Component {
                     <Pagination
                         current={scene_current}
                         pageSize={scene_size}
-                        total={10}
-                        // onChange={() => }
+                        total={scene_total}
+                        onChange={page => this.changePage(page)}
                     ></Pagination>
                 </div>
             </div>
