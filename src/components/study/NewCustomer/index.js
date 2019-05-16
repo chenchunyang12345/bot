@@ -9,7 +9,7 @@ class NewCustomer extends Component {
     }
 
     render() {
-        let { visible } = this.props;
+        let { visible, closeModal, jumpReal } = this.props;
         return (
             <Modal
                 wrapClassName='new_customer'
@@ -19,7 +19,7 @@ class NewCustomer extends Component {
                 footer={null}
             >
                 {/* 右上关闭 */}
-                <div className={styles.close}></div>
+                <div className={styles.close} onClick={() => closeModal()}></div>
                 {/* 标题 */}
                 <div className={styles.title}>新建客户</div>
                 {/* 表单详情 */}
@@ -75,7 +75,7 @@ class NewCustomer extends Component {
                     <Select></Select>
                 </div>
                 {/* 底部按钮 */}
-                <Button className={styles.btn1} type={'primary'}>来自真实客户</Button>
+                <Button className={styles.btn1} type={'primary'} onClick={() => jumpReal()}>来自真实客户</Button>
                 <Button className={styles.btn2}>保存</Button>
             </Modal>
         )

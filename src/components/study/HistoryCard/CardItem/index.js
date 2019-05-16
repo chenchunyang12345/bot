@@ -54,8 +54,8 @@ class CardItem extends Component {
                 <div className={styles.info}>真实小男<span>|</span>男<span>|</span>32岁</div>
                 <div className={styles.report}>报告个数：1</div>
                 <div className={styles.level}>难度指数：<Level_star level={1} /></div>
-                <a className={styles.btn_history} href='/#/study/history'>历史记录</a> 
-                <a className={styles.btn_practice} href='/#/study/practice'>再练习</a>
+                <a className={styles.btn_history} href='/#/study/history?id=1'>历史记录</a> 
+                <a className={styles.btn_practice} href='/#/study/dm'>再练习</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}

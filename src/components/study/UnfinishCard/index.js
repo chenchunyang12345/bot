@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.less';
+import { connect } from 'dva';
 
 import classnames from 'classnames';
 import MyModal from '../../common/modal';
@@ -12,8 +13,32 @@ class UnfinishCard extends Component {
         }
     }
 
+    handleDelete(id) {
+        new Promise((resolve, reject) => {
+            this.props.dispatch({
+                type: 'study_history/deleteUnfinish',
+                serviceName: 'deleteUnfinish',
+                id,
+                resolve,
+                reject,
+            })
+        }).then((data) => {
+            console.log(data);
+            this.setState({
+                visible: false,
+            })
+        })
+    }
+
+    componentWillUnmount() {
+        // 防止组件销毁了还setState
+        this.setState = (state, callback) => {
+            return;
+        }
+    }
+
     render() {
-        let { num } = this.props;
+        let { num, detail } = this.props;
         let { visible } = this.state;
         return (
             <div className={classnames({
@@ -22,7 +47,7 @@ class UnfinishCard extends Component {
             })}>
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
                 <div className={styles.img}></div>
-                <div className={styles.date}>2019年4月29日 16：02</div>
+                <div className={styles.date}>{detail.createTime}</div>
                 <div className={styles.continue_btn}>继续</div>
                 {/* 确认框 */}
                 <MyModal
@@ -30,7 +55,7 @@ class UnfinishCard extends Component {
                     okType={'danger'}
                     okText={'确定'}
                     cancelText={'取消'}
-                    onOk={() => this.setState({visible: false})}
+                    onOk={() => this.handleDelete(detail.id)}
                     onCancel={() => this.setState({visible: false})}
                     maskClosable={false}
                 >
@@ -41,4 +66,8 @@ class UnfinishCard extends Component {
   }
 }
 
-export default UnfinishCard;
+function mapStateToProps({ study_history }) {
+    return {...study_history};
+}
+
+export default connect(mapStateToProps)(UnfinishCard);

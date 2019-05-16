@@ -1,6 +1,6 @@
 import fetch from 'dva/fetch';
 
-import { API_URL_BASE } from './config';
+const { API_URL_BASE } = require('./config').default;
 
 function parseJSON(response) {
   return response.json();
@@ -30,7 +30,7 @@ function request(url, method, body) {
     body: JSON.stringify(body),
     headers: { 
       'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token')
+      'Authorization':'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJleHBUaW1lIjoiMjAxOS0wNS0xNCAxODo0ODowMyIsImlkIjoxLCJ1c2VybmFtZSI6ImFkbWluIn0.vKOjqIWnNraYzzsPh7pbpq8SRCu2iAbLy0GjSxAp22wNVo2modvbbQDMT0uEr-dO_PokvyAANHUUWv3rTYwmvQ',
     }
   }).then(checkStatus).then(parseJSON).then(data => ({ data })).catch(err => ({ err }));
 }
@@ -50,7 +50,7 @@ async function getDataAndTotal(url, method, body) {
     body: JSON.stringify(body),
     headers: { 
       'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token')
+      'Authorization':'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJleHBUaW1lIjoiMjAxOS0wNS0xNCAxODo0ODowMyIsImlkIjoxLCJ1c2VybmFtZSI6ImFkbWluIn0.vKOjqIWnNraYzzsPh7pbpq8SRCu2iAbLy0GjSxAp22wNVo2modvbbQDMT0uEr-dO_PokvyAANHUUWv3rTYwmvQ',
     }
   })
   .then(checkStatus)
@@ -63,7 +63,7 @@ async function getDataAndTotal(url, method, body) {
   .then(parseJSON)
   .then(data => ({ data }))
   .catch(err => ({ err }));
-
+  
   return { ...data, headers: headers };
 }
 

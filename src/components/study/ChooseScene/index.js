@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import styles from './index.less';
+import { connect } from 'dva';
+
 import { Pagination } from 'antd';
 import classnames from 'classnames';
-
-import styles from './index.less';
 
 import SceneCard from './SceneCard';
 
@@ -14,34 +15,65 @@ class ChooseScene extends Component {
         }
     }
 
-    render() {
+    renderTabs() {
         let { choose_tab } = this.state;
+        let { scene_type } = this.props;
+        return scene_type.map((scene, idx) => {
+            return (
+                <div 
+                    key={idx}
+                    className={classnames({
+                        [styles.items]: true,
+                        [styles.choose]: choose_tab === idx + 1 ? true : false
+                    })} 
+                    onClick={() => this.setState({choose_tab: idx + 1})}
+                >{scene}</div>
+            )
+        })
+    }
+
+    renderCards() {
+        let { scene_list } = this.props;
+        return scene_list.map((scene, idx) => {
+            return <SceneCard
+                        key={idx}
+                        detail={scene}
+                    />
+        })
+    }
+
+    render() {
+        console.log(this.props)
+        let { scene_total, scene_size, scene_current } = this.props;
         return (
             <div>
                 <div className={styles.content}>
                     <div className={styles.tabs}>
-                        <div className={classnames({
-                            [styles.items]: true,
-                            [styles.choose]: choose_tab === 1 ? true : false
-                        })} onClick={() => this.setState({choose_tab: 1})}>电话邀约</div>
-                        <div className={classnames({
-                            [styles.items]: true,
-                            [styles.choose]: choose_tab === 2 ? true : false
-                        })} onClick={() => this.setState({choose_tab: 2})}>首次面谈</div>
+                        {
+                            this.renderTabs()
+                        }
                     </div>
                     <div className={styles.detail}>
-                        <SceneCard></SceneCard>
-                        <SceneCard></SceneCard>
-                        <SceneCard></SceneCard>
-                        <SceneCard></SceneCard>
+                        {
+                            this.renderCards()
+                        }
                     </div>
                 </div>
                 <div className={styles.change_page}>
-                    <Pagination></Pagination>
+                    <Pagination
+                        current={scene_current}
+                        pageSize={scene_size}
+                        total={10}
+                        // onChange={() => }
+                    ></Pagination>
                 </div>
             </div>
         )
   }
 }
 
-export default ChooseScene;
+function mapStateToProps({ study_customize }) {
+    return {...study_customize};
+}
+
+export default connect(mapStateToProps)(ChooseScene);

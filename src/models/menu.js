@@ -1,11 +1,11 @@
 export default {
     namespace: 'menu',
     state: {
-        current: 'home',   // 当前导航栏选中项
+        current: 'home',    // 当前导航栏选中项
     },
     reducers: {
-        handleClick(state, { payload }) {
-            return {...state, current: payload};
+        handleClick(state, { payload: current }) {
+            return {...state, current};
         }
     },
     effects: {

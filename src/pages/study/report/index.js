@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.less';
+import { connect } from 'dva';
 
 import { Progress } from 'antd';
 
@@ -78,4 +79,8 @@ class Report extends Component {
   }
 }
 
-export default Report;
+function mapStateToProps({ study_report }) {
+    return {...study_report};
+}
+
+export default connect(mapStateToProps)(Report);

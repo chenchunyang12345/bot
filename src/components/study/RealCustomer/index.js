@@ -12,22 +12,23 @@ class RealCustomer extends Component {
     }
 
     render() {
+        let { visible, closeModal } = this.props;
         return (
             <Modal
                 wrapClassName='real_customer'
-                visible={true}
+                visible={visible}
                 closable={false}
                 width={740}
                 footer={null}
             >
-                <div className={styles.close}></div>
+                <div className={styles.close} onClick={() => closeModal()}></div>
                 <div className={styles.title}>来自真实客户</div>
                 <div className={styles.content}>
                     <div className={styles.left}>
                         <SearchList></SearchList>
                     </div>
                     <div className={styles.right}>
-                        <CustomDetail></CustomDetail>
+                        <CustomDetail closeModal={closeModal}></CustomDetail>
                     </div>
                 </div>
             </Modal>

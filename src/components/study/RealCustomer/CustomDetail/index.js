@@ -9,6 +9,7 @@ class CustomDetail extends Component {
     }
 
     render() {
+        let { closeModal } = this.props;
         return (
             <div className={styles.container}>
                 <div className={styles.title}>已选择联系人</div>
@@ -55,7 +56,7 @@ class CustomDetail extends Component {
                         <span>未知</span>
                     </div>
                 </div>
-                <Button className={styles.btn1}>取消</Button>
+                <Button className={styles.btn1} onClick={() => closeModal()}>取消</Button>
                 <Button className={styles.btn2} type='primary'>导入</Button>
             </div>
         )
