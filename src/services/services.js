@@ -16,7 +16,6 @@ export default {
     study_customize: {
         getCustomers: ({ payload, pagination }) =>
             getDataAndTotal(`/customer/search?page=${pagination.current}&size=${pagination.pageSize}`, 'POST', payload),
-        getRealCustomers: () => get(`/customer/real/customers`),
         getSceneTypes: () => get(`/scene/find/all/type`),
         getSceneList: ({ payload, pagination }) =>
             getDataAndTotal(`/scene/find/by/type?type=${payload.type}&page=${pagination.current}&size=${pagination.pageSize}`, 'GET'),
@@ -33,5 +32,14 @@ export default {
     },
     study_report: {
         getReport: ({ id }) => get(`/report/detail/${id}`),
+    },
+    study_customer: {
+        getRealCustomers: () => get(`/customer/real/customers`),
+    },
+    study_dm: {
+        openSession: ({ id }) => post(`/dialog/open/session/${id}`),
+        talk: ({ id, payload }) => post(`/dialog/session/${id}`, payload),
+        getHistory: ({ id }) => get(`/history/list/${id}`),
+        getCardInfo: ({ id }) => get(`/task/card/detail/${id}`),
     }
 }

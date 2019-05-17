@@ -13,8 +13,6 @@ class HistoryCard extends Component {
 
     renderCards() {
         let { history_list } = this.props;
-        console.log(history_list)
-        history_list = [1,2,34,5,5]
         return history_list.map((history, idx) => {
             return <CardItem 
                         key={idx}
@@ -38,6 +36,7 @@ class HistoryCard extends Component {
     render() {
         let { loading } = this.props;
         let { history_current, history_size, history_total } = this.props;
+        console.log(history_current, history_size, history_total)
         return (
             <div className={styles.history}>
                 {/* 卡片组件 */}

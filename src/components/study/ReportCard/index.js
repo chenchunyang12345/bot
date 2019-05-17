@@ -58,6 +58,7 @@ class ReportCard extends Component {
                     cancelText={'取消'}
                     onOk={() => this.handleDelete(detail.id)}
                     onCancel={() => this.setState({visible: false})}
+                    onClose={() => this.setState({visible: false})}
                     maskClosable={false}
                 >
                     您确定要删除此报告吗？

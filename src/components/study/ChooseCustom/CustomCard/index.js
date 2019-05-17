@@ -48,7 +48,7 @@ class CustomCard extends Component {
 
     render() {
         let { visible, confirmLoading } = this.state;
-        let { detail, customers_id } = this.props;
+        let { detail, customers_id, num } = this.props;
         return (
             <div 
                 className={classnames({
@@ -57,10 +57,10 @@ class CustomCard extends Component {
                 })}
                 onClick={() => this.handleChoose(detail.id)}
             >
-                <div className={styles.bg_img}></div>
+                <div className={styles[`bg_img${num}`]}></div>
                 <div className={styles.head_img}></div>
                 <div className={styles.name}>{detail.username}</div>
-                <div className={styles.detail}>{detail.gender}<span>|</span>{detail.age}岁<span>|</span>{detail.profession}</div>
+                <div className={styles.detail}>{detail.gender === 'MALE' ? '男' : '女'}<span>|</span>{detail.age}岁<span>|</span>{detail.profession}</div>
                 <div className={styles.delete} onClick={(e) => {
                     e.stopPropagation();
                     this.setState({visible: true});
@@ -73,6 +73,7 @@ class CustomCard extends Component {
                     confirmLoading={confirmLoading}
                     onOk={() => this.handleOk(detail.id)}
                     onCancel={() => this.setState({visible: false})}
+                    onClose={() => this.setState({visible: false})}
                     maskClosable={false}
                 >您确定要删除虚拟用户小花吗？</MyModal>
             </div>

@@ -46,7 +46,7 @@ class History extends Component {
         return (
             <div>
                 <div className={styles.back}>
-                    <a href="">返回</a>
+                    <a href="/#/study">返回</a>
                 </div>
                 <div className={styles.tabs_nav}>
                     <div className={classnames({

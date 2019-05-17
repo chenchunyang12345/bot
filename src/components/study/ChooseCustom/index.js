@@ -20,6 +20,7 @@ class ChooseCustom extends Component {
             search_name: '',
         }
         this.closeModal = this.closeModal.bind(this);
+        this.jumpImport = this.jumpImport.bind(this);
         this.jumpReal = this.jumpReal.bind(this);
     }
 
@@ -31,11 +32,22 @@ class ChooseCustom extends Component {
         })
     }
 
+    // 导入方法
+    jumpImport() {
+        this.setState({
+            visible_new: true,
+            visible_real: false,
+        })
+    }
+
     // 新建客户跳到真实客户
     jumpReal() {
         this.setState({
             visible_new: false,
             visible_real: true,
+        })
+        this.props.dispatch({
+            type: 'study_customer/getRealCustomers',
         })
     }
 
@@ -46,6 +58,7 @@ class ChooseCustom extends Component {
             return <CustomCard 
                         key={idx}
                         detail={customer}
+                        num={idx + 1}
                     />
         })
     }
@@ -135,6 +148,7 @@ class ChooseCustom extends Component {
                         <RealCustomer 
                             visible={visible_real} 
                             closeModal={this.closeModal}
+                            jumpImport={this.jumpImport}
                         ></RealCustomer>
                     </div>
                     <div className={styles.detail}>

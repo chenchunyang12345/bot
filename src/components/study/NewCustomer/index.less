@@ -28,7 +28,10 @@
 
 // 表单内样式
 :global(.new_customer) {
-    font-size: 12px;
+
+    :global(.ant-modal-body) {
+        font-size: 12px;
+    }
 
     .close {
         width: 24px;
@@ -64,7 +67,35 @@
     .group_item2 {
         .flex_position;
         left: 188px;
-        top: 132px;
+        top: 142px;
+        line-height: 15px;
+
+        div {
+            width: 46px;
+            display: flex;
+            cursor: pointer;
+
+            .sex_text {
+                margin-right: 12px;
+                margin-left: 4px;
+            }
+
+            .choose {
+                width: 15px;
+                height: 15px;
+                background-image: url('../../../assets/level_choose.png');
+                background-size: 100% 100%;
+                cursor: pointer;
+            }
+
+            .nochoose {
+                width: 15px;
+                height: 15px;
+                border: 1px solid #C4C6CF;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
     }
 
     .group_item3 {
@@ -81,24 +112,20 @@
 
     .group_item5 {
         .flex_position;
-        left: 160px;
+        left: 164px;
         top: 283px;
     }
 
     .group_item6 {
         .flex_position;
-        left: 160px;
+        left: 164px;
         top: 335px;
     }
 
     .group_item7 {
         .flex_position;
-        left: 160px;
+        left: 164px;
         top: 386px;
-
-        span:nth-child(1) {
-            width: 98px;
-        }
     }
 
     .group_item8 {
@@ -119,6 +146,7 @@
     }
 
     .btn1 {
+        font-size: 12px;
         width: 111px;
         height: 30px;
         position: absolute;
@@ -127,11 +155,16 @@
     }
 
     .btn2 {
+        font-size: 12px;
         width: 61px;
         height: 30px;
         position: absolute;
         left: 411px;
         bottom: 30px;
+    }
+
+    :global(.ant-btn-loading) {
+        padding-right: 50px;
     }
 }
 

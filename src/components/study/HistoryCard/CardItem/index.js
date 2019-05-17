@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import styles from './index.less';
+
+import { Tooltip } from 'antd';
 
 import MyModal from '../../../common/modal';
 
@@ -32,8 +33,10 @@ class CardItem extends Component {
     }
 
     render() {
-        let { img } = this.props;
+        let { img, detail } = this.props;
         let { visible } = this.state;
+        console.log(detail)
+        let { customer, scene } = detail;
         return (
             <div className={styles.card_wrap}>
                 <div className={styles[`card_img_${img}`]}>
@@ -41,21 +44,24 @@ class CardItem extends Component {
                     <div className={styles.delete} onClick={() => this.handleDelete()}></div>
                     <div className={styles.scene}>
                         场景：
-                        <span>电话邀约-转介绍-接洽</span>
+                        <span>{scene.name}</span>
                     </div>
                     <div className={styles.task}>
                         任务：
-                        <span>
-                            成功确认对方身份，介绍自己，确认对方是否方便，如果方便何时见面，面谈要点有哪些。成功确认对方身份，介绍自己，确认对方是否...
-                        </span>
+                        <span>{scene.task}</span>
                     </div>
                 </div>
                 <div className={styles[`head_img_${img}`]}></div>
-                <div className={styles.info}>真实小男<span>|</span>男<span>|</span>32岁</div>
-                <div className={styles.report}>报告个数：1</div>
-                <div className={styles.level}>难度指数：<Level_star level={1} /></div>
-                <a className={styles.btn_history} href='/#/study/history?id=1'>历史记录</a> 
-                <a className={styles.btn_practice} href='/#/study/dm'>再练习</a>
+                <div className={styles.info}>{customer.username}<span>|</span>{customer.gender === 'MALE' ? '男' : '女'}<span>|</span>{customer.age}岁</div>
+                <div className={styles.report}>报告个数：{detail.countList[0].status === "FINISHED" ? detail.countList[0].count : detail.countList[1].count}</div>
+                <div className={styles.level}>难度指数：<Level_star level={detail.level} /></div>
+                <Tooltip title={`您有${detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}个训练待完成`}>
+                    <a className={styles.btn_history} href={`/#/study/history?id=${detail.id}`}>
+                        <div className={styles.budge}>{detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}</div>
+                        历史记录
+                    </a>
+                </Tooltip>
+                <a className={styles.btn_practice} href={`/#/study/dm?id=${detail.id}`}>再练习</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}
@@ -63,6 +69,7 @@ class CardItem extends Component {
                     cancelText={'取消'}
                     onOk={() => this.setState({visible: false})}
                     onCancel={() => this.setState({visible: false})}
+                    onClose={() => this.setState({visible: false})}
                     maskClosable={false}
                 >
                     您确定要删除此历史练习卡吗？

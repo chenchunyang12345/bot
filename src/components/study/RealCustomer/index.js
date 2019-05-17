@@ -12,7 +12,7 @@ class RealCustomer extends Component {
     }
 
     render() {
-        let { visible, closeModal } = this.props;
+        let { visible, closeModal, jumpImport } = this.props;
         return (
             <Modal
                 wrapClassName='real_customer'
@@ -28,7 +28,10 @@ class RealCustomer extends Component {
                         <SearchList></SearchList>
                     </div>
                     <div className={styles.right}>
-                        <CustomDetail closeModal={closeModal}></CustomDetail>
+                        <CustomDetail 
+                            closeModal={closeModal} 
+                            jumpImport={jumpImport}
+                        ></CustomDetail>
                     </div>
                 </div>
             </Modal>

@@ -47,15 +47,7 @@ export default {
             if(res.err) {
                 message.error('获取报告列表失败', 2);
             }else {
-                let newList = [];
-                res.data.msg.forEach(item => {
-                    newList.push({
-                        id: item.id,
-                        createTime: item.createTime,
-                        score: item.score,
-                    })
-                })
-                yield put({type: 'updateReportList', payload: newList});
+                yield put({type: 'updateReportList', payload: res.data.msg});
             }
         },
         *getUnfinishList({ id, pagination }, { call, put }) {
@@ -63,14 +55,7 @@ export default {
             if(res.err) {
                 message.error('获取未完成列表失败', 2);
             }else {
-                let newList = [];
-                res.data.msg.forEach(item => {
-                    newList.push({
-                        id: item.id,
-                        createTime: item.createTime,
-                    })
-                })
-                yield put({type: 'updateUnfinishList', payload: newList});
+                yield put({type: 'updateUnfinishList', payload: res.data.msg});
             }
         },
         *deleteReport({ serviceName, id, resolve, reject }, { call, put, select }) {

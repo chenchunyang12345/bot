@@ -41,9 +41,8 @@ class Customize extends Component {
                 },
                 resolve,
             })
-        }).then((data) => {
-            console.log(data);
-            router.push('/study/dm');
+        }).then((id) => {
+            router.push(`/study/dm?id=${id}`);
         })
     }
 
@@ -52,7 +51,7 @@ class Customize extends Component {
         return (
             <div>
                 <div className={styles.header}>
-                    <a href="">返回</a>
+                    <a href="/#/study">返回</a>
                 </div>
                 <div className={styles.content}>
                     <MyDivider content={'第一步，选择客户'}></MyDivider>
@@ -73,7 +72,7 @@ class Customize extends Component {
                     </Spin>
                     <MyDivider content={'第三步，选择难度'}></MyDivider>
                     <ChooseLevel></ChooseLevel>
-                    <div style={{textAlign: 'center', marginTop: '25px'}}>
+                    <div style={{textAlign: 'center', marginTop: '25px', marginBottom: '100px'}}>
                         <Button 
                             type={'primary'} 
                             loading={loading.effects['study_customize/createCustomize']}

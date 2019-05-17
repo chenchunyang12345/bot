@@ -19,12 +19,12 @@ class Report extends Component {
         console.log(report_detail)
         // console.log(moment(1557992282271).format('YYYY/MM/DD'))
         if( report_detail ) {
-            let { content } = report_detail;
+            let { content, customer, scene } = report_detail;
             return (
                 <div className={styles.container}>
                     {/* 返回 */}
                     <div className={styles.back}>
-                        <a href="">返回</a>
+                        <a href="/#/study">返回</a>
                     </div>
                     {/* 报告banner */}
                     <div className={styles.banner}>
@@ -39,17 +39,17 @@ class Report extends Component {
                             <div className={styles.person}>
                                 <div className={styles.little_title}>人物信息</div>
                                 <div className={styles.person_img}></div>
-                                <div className={styles.name}>姓名：航三 </div>
-                                <div className={styles.age}>年龄：39 </div>
+                                <div className={styles.name}>姓名：{customer.username} </div>
+                                <div className={styles.age}>年龄：{customer.age} </div>
                                 <div className={styles.family}>家庭成员：3</div>
-                                <div className={styles.sex}>性别：男</div>
-                                <div className={styles.job}>职业：企业高管</div>
+                                <div className={styles.sex}>性别：{customer.gender === 'MALE' ? '男' : '女'}</div>
+                                <div className={styles.job}>职业：{customer.profession}</div>
                             </div>
                             <div className={styles.scene_detail}>
                                 <div className={styles.little_title}>场景信息</div>
                                 <div className={styles.scene_img}></div>
-                                <div className={styles.task1}>任务背景：朋友为你介绍了一个潜在客户，你通过微信和他进行的沟通 </div>
-                                <div className={styles.task2}>任务目标：让潜在客户同意与你见面</div>
+                                <div className={styles.task1}>任务背景：{scene.name}</div>
+                                <div className={styles.task2}>任务目标：{scene.task}</div>
                                 <div className={styles.level}>难度：LV2</div>
                             </div>
                         </div>

@@ -40,6 +40,7 @@ class UnfinishCard extends Component {
     render() {
         let { num, detail } = this.props;
         let { visible } = this.state;
+        console.log(detail)
         return (
             <div className={classnames({
                 [styles.card_wrap]: true,
@@ -48,7 +49,7 @@ class UnfinishCard extends Component {
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
                 <div className={styles.img}></div>
                 <div className={styles.date}>{detail.createTime}</div>
-                <div className={styles.continue_btn}>继续</div>
+                <a className={styles.continue_btn} href={`/#/study/dm?id=${detail.id}&sessionId=${detail.sessionId}&taskCardId=${detail.taskCardId}`}>继续</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}
@@ -57,6 +58,7 @@ class UnfinishCard extends Component {
                     cancelText={'取消'}
                     onOk={() => this.handleDelete(detail.id)}
                     onCancel={() => this.setState({visible: false})}
+                    onClose={() => this.setState({visible: false})}
                     maskClosable={false}
                 >
                     您确定要删除此训练吗？

@@ -9,11 +9,11 @@ class MyModal extends Component {
     }
 
     render() {
-        let { oneBtn, onCancel, ...settings } = this.props;
+        let { oneBtn, onCancel, onClose, ...settings } = this.props;
         // 如果定义为一个btn，则重新渲染footer
         if(oneBtn) {
             settings.footer = (
-                <Button type={'primary'} style={{marginLeft: '50px'}}>去看报告</Button>
+                <Button type={'primary'} style={{marginLeft: '50px'}} href='/#/study/report?id=1' >去看报告</Button>
             )
         }
         return (
@@ -25,7 +25,7 @@ class MyModal extends Component {
                 onCancel={onCancel}
                 {...settings}
             >
-                <div className={styles.close} onClick={() => onCancel && onCancel()}></div>
+                <div className={styles.close} onClick={() => onClose && onClose()}></div>
                 {this.props.children}
             </Modal>
         )

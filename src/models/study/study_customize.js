@@ -83,14 +83,6 @@ export default {
                 yield put({ type: 'setCustomersId', payload: -1 });
             }
         },
-        *getRealCustomers({ serviceName, resolve, reject }, { call }) {
-            const res = yield call(services.study_customize[serviceName]);
-            if(res.err) {
-                reject('获取真实客户信息失败');
-            } else {
-                resolve(res);
-            }
-        },
         *getSceneTypes({}, { call, put, select }) {
             const res = yield call(services.study_customize['getSceneTypes']);
             const { scene_current, scene_size } = yield select(state => state.study_customize);
@@ -113,14 +105,6 @@ export default {
                 yield put({ type: 'setSceneId', payload: -1 });
             }
         },
-        *createCustomer({ serviceName, payload, resolve, reject }, { call }) {
-            const res = yield call(services.study_customize[serviceName], { payload });
-            if(res.err) {
-                reject('新建客户失败');
-            } else {
-                resolve(res);
-            }
-        },
         *deleteCustomer({ id, resolve }, { call, put }) {
             const res = yield call(services.study_customize['deleteCustomer'], { id });
             if(res.err) {
@@ -129,6 +113,7 @@ export default {
                 resolve();
                 yield put({ type: 'deleteSomeCustomer', payload: id });
                 yield put({ type: 'setCustomersId', payload: -1 });
+                yield put({ type: 'getCustomers', payload: { username: '', type: -1 }, pagination: { current: 1, pageSize: 8 }});
             }
         },
         *createCustomize({ payload, resolve }, { call }) {

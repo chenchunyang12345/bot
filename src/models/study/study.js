@@ -8,7 +8,7 @@ export default {
         history_list: [],       // 温故知新
         history_current: 1,     // 温故知新-当前页码
         history_size: 5,        // 温故知新-每页个数
-        history_total: 10,       // 温故知新-总个数
+        history_total: 0,       // 温故知新-总个数
     },
     reducers: {
         setRecommendList(state, { payload: recommend_list }) {
@@ -38,9 +38,8 @@ export default {
             if(res.err) {
                 message.error('获取温故知新数据失败', 2);
             } else {
-                console.log(res)
-                // yield put({ type: 'setHistoryList', payload: res.data.msg });
-                // yield put({ type: 'setHistoryTotal', payload: res.header.total });
+                yield put({ type: 'setHistoryList', payload: res.data.msg });
+                yield put({ type: 'setHistoryTotal', payload: res.headers.count });
                 yield put({ type: 'setHistoryCurrent', payload: pagination.current });
             }
         },
