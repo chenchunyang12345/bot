@@ -33,7 +33,7 @@ class Study extends Component {
                 <div className={styles.content}>
                     <div className={styles.carousel}>
                         <div className={styles.type}>推荐练习</div>
-                        <a className={styles.customize} href="/#/study/customize">自定义练习</a>
+                        <a className={styles.customize} href="#/study/customize">自定义练习</a>
                         <CarouselBot></CarouselBot>
                     </div>
                     <div className={styles.exercise_card}>

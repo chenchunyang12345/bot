@@ -57,7 +57,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[0].scene.task}</span>
                                 </div>
                                 <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[0].level}/></div>
-                                <a className={styles.start_1} href={`/#/study/dm?id=${recommend_list[0].id}`}>开始</a>
+                                <a className={styles.start_1} href={`#/study/dm?id=${recommend_list[0].id}`}>开始</a>
                             </div>
                             <div className={styles.cardOne_2}>
                                 <div className={styles.name_2}>{recommend_list[5].customer.username}</div>
@@ -69,7 +69,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[5].scene.task}</span>
                                 </div>
                                 <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[5].level}/></div>
-                                <a className={styles.start_2} href={`/#/study/dm?id=${recommend_list[5].id}`}>开始</a>
+                                <a className={styles.start_2} href={`#/study/dm?id=${recommend_list[5].id}`}>开始</a>
                             </div>
                             <div className={styles.cardOne_3}>
                                 <div className={styles.name_3}>{recommend_list[6].customer.username}</div>
@@ -81,7 +81,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[6].scene.task}</span>
                                 </div>
                                 <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[6].level}/></div>
-                                <a className={styles.start_3} href={`/#/study/dm?id=${recommend_list[6].id}`}>开始</a>
+                                <a className={styles.start_3} href={`#/study/dm?id=${recommend_list[6].id}`}>开始</a>
                             </div>
                             <div className={styles.cardOne_4}>
                                 <div className={styles.name_4}>{recommend_list[2].customer.username}</div>
@@ -93,7 +93,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[2].scene.task}</span>
                                 </div>
                                 <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[2].level}/></div>
-                                <a className={styles.start_4} href={`/#/study/dm?id=${recommend_list[2].id}`}>开始</a>
+                                <a className={styles.start_4} href={`#/study/dm?id=${recommend_list[2].id}`}>开始</a>
                             </div>
                         </div>
                         <div className={styles.card_wrap}>
@@ -107,7 +107,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[1].scene.task}</span>
                                 </div>
                                 <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[1].level}/></div>
-                                <a className={styles.start_1} href={`/#/study/dm?id=${recommend_list[1].id}`}>开始</a>
+                                <a className={styles.start_1} href={`#/study/dm?id=${recommend_list[1].id}`}>开始</a>
                             </div>
                             <div className={styles.cardTwo_2}>
                                 <div className={styles.name_2}>{recommend_list[7].customer.username}</div>
@@ -119,7 +119,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[7].scene.task}</span>
                                 </div>
                                 <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[7].level}/></div>
-                                <a className={styles.start_2} href={`/#/study/dm?id=${recommend_list[7].id}`}>开始</a>
+                                <a className={styles.start_2} href={`#/study/dm?id=${recommend_list[7].id}`}>开始</a>
                             </div>
                             <div className={styles.cardTwo_3}>
                                 <div className={styles.name_3}>{recommend_list[8].customer.username}</div>
@@ -131,7 +131,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[8].scene.task}</span>
                                 </div>
                                 <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[8].level}/></div>
-                                <a className={styles.start_3} href={`/#/study/dm?id=${recommend_list[8].id}`}>开始</a>
+                                <a className={styles.start_3} href={`#/study/dm?id=${recommend_list[8].id}`}>开始</a>
                             </div>
                             <div className={styles.cardTwo_4}>
                                 <div className={styles.name_4}>{recommend_list[3].customer.username}</div>
@@ -143,7 +143,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[3].scene.task}</span>
                                 </div>
                                 <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[3].level}/></div>
-                                <a className={styles.start_4} href={`/#/study/dm?id=${recommend_list[3].id}`}>开始</a>
+                                <a className={styles.start_4} href={`#/study/dm?id=${recommend_list[3].id}`}>开始</a>
                             </div>
                         </div>
                         <div className={styles.card_wrap}>
@@ -157,7 +157,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[9].scene.task}</span>
                                 </div>
                                 <div className={styles.level_1}>难度指数：<LevelStar level={recommend_list[9].level}/></div>
-                                <a className={styles.start_1} href={`/#/study/dm?id=${recommend_list[9].id}`}>开始</a>
+                                <a className={styles.start_1} href={`#/study/dm?id=${recommend_list[9].id}`}>开始</a>
                             </div>
                             <div className={styles.cardThree_2}>
                                 <div className={styles.name_2}>{recommend_list[10].customer.username}</div>
@@ -169,7 +169,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[10].scene.task}</span>
                                 </div>
                                 <div className={styles.level_2}>难度指数：<LevelStar level={recommend_list[10].level}/></div>
-                                <a className={styles.start_2} href={`/#/study/dm?id=${recommend_list[10].id}`}>开始</a>
+                                <a className={styles.start_2} href={`#/study/dm?id=${recommend_list[10].id}`}>开始</a>
                             </div>
                             <div className={styles.cardThree_3}>
                                 <div className={styles.name_3}>{recommend_list[11].customer.username}</div>
@@ -181,7 +181,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[11].scene.task}</span>
                                 </div>
                                 <div className={styles.level_3}>难度指数：<LevelStar level={recommend_list[11].level}/></div>
-                                <a className={styles.start_3} href={`/#/study/dm?id=${recommend_list[11].id}`}>开始</a>
+                                <a className={styles.start_3} href={`#/study/dm?id=${recommend_list[11].id}`}>开始</a>
                             </div>
                             <div className={styles.cardThree_4}>
                                 <div className={styles.name_4}>{recommend_list[4].customer.username}</div>
@@ -193,7 +193,7 @@ class CarouselBot extends Component {
                                     <span>{recommend_list[4].scene.task}</span>
                                 </div>
                                 <div className={styles.level_4}>难度指数：<LevelStar level={recommend_list[4].level}/></div>
-                                <a className={styles.start_4} href={`/#/study/dm?id=${recommend_list[4].id}`}>开始</a>
+                                <a className={styles.start_4} href={`#/study/dm?id=${recommend_list[4].id}`}>开始</a>
                             </div>
                         </div>
                     </Carousel>

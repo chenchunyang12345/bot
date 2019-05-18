@@ -91,7 +91,7 @@ export default {
                 if(location.pathname === '/study/dm') {
                     dispatch({
                         type: 'getCardInfo',
-                        id: location.query.taskCardId,
+                        id: location.query.id,
                     })
                     // 地址栏如果传了sessionId，那么表示想继续对话
                     if(location.query.sessionId) {

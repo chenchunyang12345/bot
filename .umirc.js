@@ -25,5 +25,6 @@ export default {
   history: 'hash',
   targets: {
     ie: 11,
-  }
+  },
+  publicPath:'./',
 }

@@ -43,12 +43,13 @@ export default {
                 yield put({ type: 'setHistoryCurrent', payload: pagination.current });
             }
         },
-        *deleteCard({ id, resolve, reject }, { call }) {
+        *deleteCard({ id, resolve }, { call, put }) {
             const res = yield call(services.study['deleteCard'], { id });
             if(res.err) {
-                reject('删除卡片失败');
+                message.error('删除卡片失败', 2);
             }else {
                 resolve(res);
+                yield put({ type: 'getHistory', pagination: { current: 1, pageSize: 5 }});
             }
         }
     },

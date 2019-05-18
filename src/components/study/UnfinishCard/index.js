@@ -49,7 +49,7 @@ class UnfinishCard extends Component {
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
                 <div className={styles.img}></div>
                 <div className={styles.date}>{detail.createTime}</div>
-                <a className={styles.continue_btn} href={`/#/study/dm?id=${detail.id}&sessionId=${detail.sessionId}&taskCardId=${detail.taskCardId}`}>继续</a>
+                <a className={styles.continue_btn} href={`#/study/dm?id=${detail.taskCardId}&sessionId=${detail.sessionId}`}>继续</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}

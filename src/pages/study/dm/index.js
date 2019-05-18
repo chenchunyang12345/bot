@@ -9,7 +9,6 @@ import { Spin } from 'antd';
 import { MsgTips, AskMsg, AnsMsg } from '../../../components/study';
 // 提示框
 import MyModal from '../../../components/common/modal';
-import { detach } from 'redux-saga';
 
 // 难度系数的组件
 const Level = (props) => {
@@ -77,7 +76,7 @@ class Dm extends Component {
 
     render() {
         let { visible_leave, input_value } = this.state;
-        let { visible_finish, card_detail } = this.props;
+        let { visible_finish, card_detail, session_id } = this.props;
         console.log(card_detail)
         let { customer, scene } = card_detail;
         return (
@@ -163,6 +162,7 @@ class Dm extends Component {
                     visible={visible_finish}
                     oneBtn={true}
                     onClose={() => this.props.dispatch({type: 'study_dm/setVisible', payload: false})}
+                    session_id={session_id}
                     maskClosable={false}
                 >恭喜您，您的任务达成了！</MyModal>
             </div>

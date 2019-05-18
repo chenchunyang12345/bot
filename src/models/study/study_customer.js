@@ -12,7 +12,7 @@ export default {
         married: 0,
         children: 1,
         health: '好',
-        money: 111,
+        income: 111,
         need: '',
         plan: 0,
         process: 0,
@@ -48,8 +48,8 @@ export default {
         setHealth(state, { payload: health }) {
             return { ...state, health };
         },
-        setMoney(state, { payload: money }) {
-            return { ...state, money };
+        setIncome(state, { payload: income }) {
+            return { ...state, income };
         },
         setNeed(state, { payload: need }) {
             return { ...state, need };

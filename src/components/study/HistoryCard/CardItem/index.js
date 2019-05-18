@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.less';
+import { connect } from 'dva';
 
 import { Tooltip } from 'antd';
 
@@ -56,18 +57,24 @@ class CardItem extends Component {
                 <div className={styles.report}>报告个数：{detail.countList[0].status === "FINISHED" ? detail.countList[0].count : detail.countList[1].count}</div>
                 <div className={styles.level}>难度指数：<Level_star level={detail.level} /></div>
                 <Tooltip title={`您有${detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}个训练待完成`}>
-                    <a className={styles.btn_history} href={`/#/study/history?id=${detail.id}`}>
+                    <a className={styles.btn_history} href={`#/study/history?id=${detail.id}`}>
                         <div className={styles.budge}>{detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}</div>
                         历史记录
                     </a>
                 </Tooltip>
-                <a className={styles.btn_practice} href={`/#/study/dm?id=${detail.id}`}>再练习</a>
+                <a className={styles.btn_practice} href={`#/study/dm?id=${detail.id}`}>再练习</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}
                     okType={'danger'}
                     cancelText={'取消'}
-                    onOk={() => this.setState({visible: false})}
+                    onOk={() => {
+                        new Promise((resolve) => {
+                            this.props.dispatch({ type: 'study/deleteCard', id: detail.id, resolve, });
+                        }).then(() => {
+                            this.setState({visible: false});
+                        })
+                    }}
                     onCancel={() => this.setState({visible: false})}
                     onClose={() => this.setState({visible: false})}
                     maskClosable={false}
@@ -79,4 +86,4 @@ class CardItem extends Component {
   }
 }
 
-export default CardItem;
+export default connect()(CardItem);

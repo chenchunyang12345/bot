@@ -23,7 +23,6 @@ class ReportCard extends Component {
                 reject,
             })
         }).then((data) => {
-            console.log(data)
             this.setState({
                 visible: false,
             });
@@ -49,7 +48,7 @@ class ReportCard extends Component {
                 <div className={styles.img}></div>
                 <div className={styles.score}>{detail.score}分</div>
                 <div className={styles.date}>{detail.createTime}</div>
-                <a href={`/#/study/report?id=${detail.id}`} className={styles.my_btn}>我的报告</a>
+                <a href={`#/study/report?id=${detail.sessionId}`} className={styles.my_btn}>我的报告</a>
                 {/* 确认框 */}
                 <MyModal
                     visible={visible}

@@ -51,7 +51,7 @@ class Customize extends Component {
         return (
             <div>
                 <div className={styles.header}>
-                    <a href="/#/study">返回</a>
+                    <a href="#/study">返回</a>
                 </div>
                 <div className={styles.content}>
                     <MyDivider content={'第一步，选择客户'}></MyDivider>

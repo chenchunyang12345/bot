@@ -24,7 +24,7 @@ class Report extends Component {
                 <div className={styles.container}>
                     {/* 返回 */}
                     <div className={styles.back}>
-                        <a href="/#/study">返回</a>
+                        <a href="#/study">返回</a>
                     </div>
                     {/* 报告banner */}
                     <div className={styles.banner}>
@@ -41,7 +41,7 @@ class Report extends Component {
                                 <div className={styles.person_img}></div>
                                 <div className={styles.name}>姓名：{customer.username} </div>
                                 <div className={styles.age}>年龄：{customer.age} </div>
-                                <div className={styles.family}>家庭成员：3</div>
+                                <div className={styles.family}>家庭成员：{customer.familyMembers}</div>
                                 <div className={styles.sex}>性别：{customer.gender === 'MALE' ? '男' : '女'}</div>
                                 <div className={styles.job}>职业：{customer.profession}</div>
                             </div>

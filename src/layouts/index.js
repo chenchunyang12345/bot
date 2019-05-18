@@ -25,25 +25,25 @@ class BasicLayout extends Component {
                                 mode="horizontal"
                             >
                                 <Menu.Item key="home">
-                                    <a href="/#/home">首页</a>
+                                    <a href="#/home">首页</a>
                                 </Menu.Item>
                                 <Menu.Item key="customer">
-                                    <a href="/#/customer">客户</a>
+                                    <a href="#/customer">客户</a>
                                 </Menu.Item>
                                 <Menu.Item key="sale">
-                                    <a href="/#/sale">销售</a>
+                                    <a href="#/sale">销售</a>
                                 </Menu.Item>
                                 <Menu.Item key="study">
-                                    <a href="/#/study">学习</a>
+                                    <a href="#/study">学习</a>
                                 </Menu.Item>
                                 <Menu.Item key="personal">
-                                    <a href="/#/personal">个人</a>
+                                    <a href="#/personal">个人</a>
                                 </Menu.Item>
                                 <Menu.Item key="help">
-                                    <a href="/#/help">帮助</a>
+                                    <a href="#/help">帮助</a>
                                 </Menu.Item>
                                 <Menu.Item>
-                                    <a href="/#/logo">登录</a>
+                                    <a href="#/logo">登录</a>
                                 </Menu.Item>
                             </Menu>
                             <div className={styles.message}></div>

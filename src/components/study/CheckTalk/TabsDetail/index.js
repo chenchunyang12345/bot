@@ -18,13 +18,13 @@ class TabsDetail extends Component {
                     <TabPane tab="优缺点" key="1">
                         <div className={styles.good}>优点</div>
                         {
-                            detail.advantages.map((advantage, idx) => {
+                            detail.advantages && detail.advantages.map((advantage, idx) => {
                                 return <div key={idx} className={styles.good_text}>{advantage}</div>
                             })
                         }
                         <div className={styles.bad}>缺点</div>
                         {
-                            detail.disadvantages.map((disadvantage, idx) => {
+                            detail.disadvantages && detail.disadvantages.map((disadvantage, idx) => {
                                 return <div key={idx} className={styles.bad_text}>{disadvantage}</div>
                             })
                         }

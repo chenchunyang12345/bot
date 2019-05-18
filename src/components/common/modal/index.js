@@ -9,11 +9,11 @@ class MyModal extends Component {
     }
 
     render() {
-        let { oneBtn, onCancel, onClose, ...settings } = this.props;
+        let { oneBtn, onCancel, onClose, session_id, ...settings } = this.props;
         // 如果定义为一个btn，则重新渲染footer
         if(oneBtn) {
             settings.footer = (
-                <Button type={'primary'} style={{marginLeft: '50px'}} href='/#/study/report?id=1' >去看报告</Button>
+                <Button type={'primary'} style={{marginLeft: '50px'}} href={`#/study/report?id=${session_id}`}>去看报告</Button>
             )
         }
         return (

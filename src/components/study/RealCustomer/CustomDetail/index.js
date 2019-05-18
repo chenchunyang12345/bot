@@ -11,7 +11,7 @@ class CustomDetail extends Component {
 
     importDetail() {
         let { display_detail, jumpImport } = this.props;
-        let { username, gender, age, profession, maritalStatus, children, budget, remarks, disposition, status, identity } = display_detail;
+        let { username, gender, age, profession, maritalStatus, children, income, budget, remarks, disposition, status, identity } = display_detail;
         this.props.dispatch({
             type: 'study_customer/importInfo',
             payload: {
@@ -22,6 +22,7 @@ class CustomDetail extends Component {
                 married: maritalStatus,
                 children: children,
                 // health: health,
+                income: income,
                 need: remarks,
                 plan: budget,
                 process: status,
@@ -36,7 +37,7 @@ class CustomDetail extends Component {
     render() {
         let { closeModal, display_detail } = this.props;
         if( display_detail ) {
-            let { username, gender, age, profession, maritalStatus, remarks, budget, identity } = display_detail;
+            let { username, gender, age, profession, maritalStatus, remarks, budget, identity, income } = display_detail;
             switch (identity) {
                 case 'LOW':
                     identity = '低';
@@ -59,7 +60,7 @@ class CustomDetail extends Component {
                         </div>
                         <div className={styles.sex}>
                             <span>性别：</span>
-                            <span>{gender}</span>
+                            <span>{gender === 'MALE' ? '男' : '女'}</span>
                         </div>
                         <div className={styles.age}>
                             <span>年龄：</span>
@@ -78,8 +79,8 @@ class CustomDetail extends Component {
                             <span>未知</span>
                         </div>
                         <div className={styles.money}>
-                            <span>经济状况：</span>
-                            <span>未知</span>
+                            <span>收入：</span>
+                            <span>{income}</span>
                         </div>
                         <div className={styles.need}>
                             <span>保险需求：</span>

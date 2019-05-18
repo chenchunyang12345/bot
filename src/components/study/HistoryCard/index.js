@@ -36,7 +36,6 @@ class HistoryCard extends Component {
     render() {
         let { loading } = this.props;
         let { history_current, history_size, history_total } = this.props;
-        console.log(history_current, history_size, history_total)
         return (
             <div className={styles.history}>
                 {/* 卡片组件 */}

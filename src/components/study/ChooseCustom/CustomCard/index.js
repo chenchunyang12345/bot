@@ -75,7 +75,7 @@ class CustomCard extends Component {
                     onCancel={() => this.setState({visible: false})}
                     onClose={() => this.setState({visible: false})}
                     maskClosable={false}
-                >您确定要删除虚拟用户小花吗？</MyModal>
+                >您确定要删除{detail.type === '0' ? '真实客户' : '虚拟用户'}{detail.username}吗？</MyModal>
             </div>
         )
   }

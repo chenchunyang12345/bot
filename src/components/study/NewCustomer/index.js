@@ -65,10 +65,10 @@ class NewCustomer extends Component {
         })
     }
     // 8、经济状况
-    changeMoney(money) {
+    changeIncome(income) {
         this.props.dispatch({
-            type: 'study_customer/setMoney',
-            payload: money,
+            type: 'study_customer/setIncome',
+            payload: income,
         })
     }
     // 9、保险需求
@@ -112,7 +112,7 @@ class NewCustomer extends Component {
         // 父组件传来的props
         let { visible, closeModal, jumpReal } = this.props;
         // model里面的props
-        let { name, sex, age, job, married, children, health, money, need, plan, process, agree, character } = this.props;
+        let { name, sex, age, job, married, children, health, income, need, plan, process, agree, character } = this.props;
         // 设置保存请求参数
         let payload = {
             username: name,
@@ -122,7 +122,7 @@ class NewCustomer extends Component {
             maritalStatus: married,
             familyMembers: 3,
             children: children,
-            income: 0,
+            income: income,
             cost: 0,
             budget: plan,
             identity: agree,
@@ -197,7 +197,7 @@ class NewCustomer extends Component {
                         <Option value="差">差</Option>
                     </Select>
                     <span style={{marginLeft: '10px'}}>收入：</span>
-                    <InputNumber style={{width: '174px'}} value={money} onChange={value => this.changeMoney(value)}></InputNumber>
+                    <InputNumber style={{width: '174px'}} value={income} onChange={value => this.changeIncome(value)}></InputNumber>
                 </div>
                 <div className={styles.group_item7}>
                     <span style={{width: '60px'}}>保险需求：</span>
