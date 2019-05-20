@@ -131,6 +131,12 @@ class ChooseCustom extends Component {
                             placeholder="标题／作者／摘要"
                             value={search_name} 
                             onChange={e => this.setState({search_name: e.target.value})}
+                            onKeyDown={e => {
+                                if(e.keyCode === 13) {
+                                    e.preventDefault();
+                                    this.handleSearch()
+                                }
+                            }}
                             handleSearch={() => this.handleSearch()}
                         />
                         <Button

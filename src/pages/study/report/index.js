@@ -50,7 +50,7 @@ class Report extends Component {
                                 <div className={styles.scene_img}></div>
                                 <div className={styles.task1}>任务背景：{scene.name}</div>
                                 <div className={styles.task2}>任务目标：{scene.task}</div>
-                                <div className={styles.level}>难度：LV2</div>
+                                <div className={styles.level}>难度：LV{report_detail.level}</div>
                             </div>
                         </div>
                     </div>

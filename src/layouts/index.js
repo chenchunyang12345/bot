@@ -2,15 +2,37 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 
-import { Menu } from 'antd';
+import { Menu, Popover } from 'antd';
 
 class BasicLayout extends Component {
     constructor(props) {
         super(props);
     }
 
+    renderContent() {
+        let { message_list, clearMessage } = this.props;
+        return (
+            <div className={styles.msg_wrap}>
+                <div className={styles.title}>通知</div>
+                <div className={styles.check} onClick={() => clearMessage()}></div>
+                {
+                    message_list.length ? 
+                    message_list.map((message, idx) => {
+                        return (
+                            <div className={styles.list} key={idx}>
+                                <div className={styles.dot}></div>
+                                <div className={styles.text}>行程更新( {message} )</div>
+                            </div>
+                        )
+                    }):
+                    <div style={{color: 'red', fontSize: '12px'}}>暂无通知</div>
+                }
+            </div>
+        )
+    }
+
     render() {
-        let { current, handleClick } = this.props;
+        let { current, handleClick, message_list } = this.props;
         return (
             <div className={styles.wrap_page}>
                 <div className={styles.header}>
@@ -46,7 +68,20 @@ class BasicLayout extends Component {
                                     <a href="#/logo">登录</a>
                                 </Menu.Item>
                             </Menu>
-                            <div className={styles.message}></div>
+                            <Popover
+                                placement="bottomRight" 
+                                trigger="hover"
+                                overlayClassName={styles.message_pop}
+                                content={this.renderContent()}
+                            >
+                                <div className={styles.message}></div>
+                                {/* 消息的个数 */}
+                                {
+                                    message_list.length ? 
+                                    <div className={styles.budge}>{message_list.length}</div> :
+                                    null
+                                }
+                            </Popover>
                         </div>
                     </div>
                 </div>
@@ -62,8 +97,8 @@ class BasicLayout extends Component {
   }
 }
 
-function mapStateToProps({ menu }) {
-    return {...menu};
+function mapStateToProps({ menu, message }) {
+    return { ...menu, ...message };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -72,6 +107,11 @@ function mapDispatchToProps(dispatch) {
             dispatch({
                 type: 'menu/handleClick',
                 payload: key
+            })
+        },
+        clearMessage: () => {
+            dispatch({
+                type: 'message/clearMessage',
             })
         }
     }

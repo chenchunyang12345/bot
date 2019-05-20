@@ -27,6 +27,7 @@
             .nav {
                 display: flex;
                 align-items: center;
+                position: relative;
 
                 :global(.ant-menu-horizontal) {
                     border: none;
@@ -60,6 +61,22 @@
                     height: 14px;
                     background-image: url('../assets/message.png');
                     background-size: 100% 100%;
+                    margin-right: 15px;
+                    margin-left: 20px;
+                }
+
+                .budge {
+                    width: 12px;
+                    height: 12px;
+                    background-color: #FE4F4C;
+                    color: #fff;
+                    font-size: 12px;
+                    line-height: 12px;
+                    text-align: center;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: 6px;
+                    top: 12px;
                 }
             }
         }
@@ -69,4 +86,61 @@
 .inner {
     width: 1200px;
     margin: 0 auto;
+}
+
+// 消息的气泡
+.message_pop {
+    left: 1118px !important;
+    top: 40px !important;
+    width: 240px;
+    color: #333;
+
+    :global(.ant-popover-inner-content) {
+        padding: 0;
+
+        .msg_wrap {
+            padding: 10px;
+            position: relative;
+
+            .title {
+                height: 40px;
+                line-height: 35px;
+                color: #666;
+                font-size: 14px;
+                border-bottom: 1px solid #DCDCE0;
+                margin-bottom: 10px;
+            }
+
+            .check {
+                width: 14px;
+                height: 10px;
+                background-image: url('../assets/check.png');
+                background-size: 100% 100%;
+                position: absolute;
+                right: 16px;
+                top: 22px;
+                cursor: pointer;
+            }
+
+            .list {
+                display: flex;
+                margin-bottom: 10px;
+
+                .dot {
+                    width: 6px;
+                    height: 6px;
+                    background-color: #FF9390;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                    position: relative;
+                    top: 8px;
+                }
+
+                .text {
+                    flex: 1;
+                }
+            }
+        }
+    }
+
 }

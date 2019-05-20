@@ -20,6 +20,12 @@ class SearchList extends Component {
                         value={search_name} 
                         onChange={e => this.props.dispatch({type: 'study_customer/setSearchName', payload: e.target.value})} 
                         handleSearch={() => this.props.dispatch({type: 'study_customer/filterSearchName', payload: search_name})}
+                        onKeyDown={e => {
+                            if(e.keyCode === 13) {
+                                e.preventDefault();
+                                this.props.dispatch({type: 'study_customer/filterSearchName', payload: search_name})
+                            }
+                        }}
                     />
                 </div>
                 <div className={styles.list}>

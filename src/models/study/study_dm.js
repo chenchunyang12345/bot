@@ -61,9 +61,13 @@ export default {
             if(res.err) {
                 message.error('对话失败', 2);
             } else {
+                // 对话结束弹出查看报告modal
                 if(res.data.msg.instructions[0].params.title === '结束') {
                     yield put({ type: 'setVisible', payload: true });
                 }
+                // 监听信息看里面有没有相应的信息点字段
+                yield put({ type: 'message/listenMessage', payload: res.data.msg.instructions });
+                // 渲染回答
                 yield put({ type: 'updateTalk', payload: res.data.msg.result, num: 2 });
             }
         },
