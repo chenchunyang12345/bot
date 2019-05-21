@@ -1,23 +1,27 @@
 import services from '../../services/services';
 import { message } from 'antd';
 
+// 初始化表单的信息
+const initialForm = {
+    name: '',
+    sex: 'MALE',
+    age: 30,
+    job: '公司白领',
+    married: 0,
+    children: 0,
+    health: '健康',
+    income: 112,
+    need: '',
+    plan: 0,
+    process: 0,
+    agree: 'HIGH',
+    character: '温和内敛',
+}
+
 export default {
     namespace: 'study_customer',
     state: {
-        // 新建客户表单内容
-        name: '',
-        sex: 'MALE',
-        age: 30,
-        job: '公司白领',
-        married: 0,
-        children: 1,
-        health: '好',
-        income: 111,
-        need: '',
-        plan: 0,
-        process: 0,
-        agree: 'HIGH',
-        character: '温和内敛',
+        ...initialForm,
         // 真实客户信息
         real_list: [],
         render_list: [],
@@ -87,6 +91,10 @@ export default {
         // 导入信息
         importInfo(state, { payload }) {
             return { ...state, ...payload };
+        },
+        // 初始化新建的表单信息
+        initial(state) {
+            return { ...state, ...initialForm };
         }
     },
     effects: {

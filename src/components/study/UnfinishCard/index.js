@@ -40,14 +40,13 @@ class UnfinishCard extends Component {
     render() {
         let { num, detail } = this.props;
         let { visible } = this.state;
-        console.log(detail)
         return (
             <div className={classnames({
                 [styles.card_wrap]: true,
                 [styles.card_nomargin]: num % 4 === 0 ? true : false,
             })}>
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
-                <div className={styles.img}></div>
+                <div className={styles[`img${num % 8 === 0 ? 8 : num % 8}`]}></div>
                 <div className={styles.date}>{detail.createTime}</div>
                 <a className={styles.continue_btn} href={`#/study/dm?id=${detail.taskCardId}&sessionId=${detail.sessionId}`}>继续</a>
                 {/* 确认框 */}

@@ -49,6 +49,11 @@ class NewCustomer extends Component {
             type: 'study_customer/setMarried',
             payload: married,
         })
+        // 通过结没结婚设置默认的孩子个数
+        this.props.dispatch({
+            type: 'study_customer/setChildren',
+            payload: married === 2 ? 0 : married,
+        })
     }
     // 6、孩子个数
     changeChildren(children) {
@@ -176,11 +181,13 @@ class NewCustomer extends Component {
                 <div className={styles.group_item5}>
                     <span>家庭情况：</span>
                     <Select style={{width: '140px'}} value={married} onSelect={value => this.changeMarried(value)}>
-                        <Option value={1}>已婚</Option>
                         <Option value={0}>未婚</Option>
+                        <Option value={1}>已婚</Option>
+                        <Option value={2}>离异</Option>
                     </Select>
                     <span style={{marginLeft: '10px', marginRight: '5px'}}>有：</span>
                     <Select style={{width: '140px'}} value={children} onSelect={value => this.changeChildren(value)}>
+                        <Option value={0}>0</Option>
                         <Option value={1}>1</Option>
                         <Option value={2}>2</Option>
                         <Option value={3}>3</Option>
@@ -191,14 +198,11 @@ class NewCustomer extends Component {
                 </div>
                 <div className={styles.group_item6}>
                     <span>健康状况：</span>
-                    <Select style={{width: '140px'}} value={health} onSelect={value => this.changeHealth(value)}>
-                        <Option value="好">好</Option>
-                        <Option value="一般">一般</Option>
-                        <Option value="差">差</Option>
-                    </Select>
+                    <Input style={{width: '140px'}} value={health} onChange={e => this.changeHealth(e.target.value)}></Input>
                     <span style={{marginLeft: '10px'}}>收入：</span>
                     <InputNumber style={{width: '174px'}} value={income} onChange={value => this.changeIncome(value)}></InputNumber>
                 </div>
+                <div className={styles.tips}>提示：如有疾病请直接填写疾病名称</div>
                 <div className={styles.group_item7}>
                     <span style={{width: '60px'}}>保险需求：</span>
                     <Input style={{width: '360px'}} value={need} onChange={e => this.changeNeed(e.target.value)}></Input>

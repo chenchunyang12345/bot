@@ -45,7 +45,7 @@ class ReportCard extends Component {
                 [styles.card_nomargin]: num % 4 === 0 ? true : false,
             })}>
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
-                <div className={styles.img}></div>
+                <div className={styles[`img${num % 8 === 0 ? 8 : num % 8}`]}></div>
                 <div className={styles.score}>{detail.score}分</div>
                 <div className={styles.date}>{detail.createTime}</div>
                 <a href={`#/study/report?id=${detail.sessionId}`} className={styles.my_btn}>我的报告</a>

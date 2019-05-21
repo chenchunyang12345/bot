@@ -30,6 +30,12 @@ class ChooseCustom extends Component {
             visible_new: false,
             visible_real: false,
         })
+        // 设置定时器是避免关闭动画还没结束，表单里面的数据就清空了
+        setTimeout(() => {
+            this.props.dispatch({
+                type: 'study_customer/initial',
+            });
+        }, 500);
     }
 
     // 导入方法
