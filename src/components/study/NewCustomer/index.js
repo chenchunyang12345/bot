@@ -2,24 +2,50 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 
-import { Modal, Button, Input, InputNumber, Select } from 'antd';
+import { Modal, Button, Input, InputNumber, Select, Icon, message } from 'antd';
 
 const Option = Select.Option;
+
+// 名字的正则
+let NAMEREGEXP = /^[a-zA-Z\u4e00-\u9fa5]{2,15}$/;
 
 class NewCustomer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            loading: false,     // 保存的loading
         }
+    }
+
+    // 检查姓名
+    checkName(value) {
+        if(NAMEREGEXP.test(value)) {
+            this.props.dispatch({ type: 'study_customer/setNameReg', payload: true });
+        }else {
+            this.props.dispatch({ type: 'study_customer/setNameReg', payload: false });
+        }
+    }
+
+    // 检测用户是否导入后进行了修改
+    checkUpdate() {
+        // 导入值
+        let { display_detail } = this.props;
+        // 当前表单中的值
+        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character } = this.props;
+        // 对比
+        if(display_detail.username === name && display_detail.gender === sex && display_detail.age === age && display_detail.profession === job && display_detail.maritalStatus === married && display_detail.children === children && health === '健康' && display_detail.income === income && display_detail.cost === cost && display_detail.remarks === need && display_detail.budget === plan && display_detail.status === process && display_detail.identity === agree && display_detail.disposition === character) {
+            message.warn('创建的虚拟客户不可以与真实客户信息完全一样哦~');
+            return true;
+        }
+        return false;
     }
 
     // 选择后改变model里面的数据
     // 1、名字
-    changeName(e) {
+    changeName(name) {
         this.props.dispatch({
             type: 'study_customer/setName',
-            payload: e.target.value,
+            payload: name,
         })
     }
     // 2、性别
@@ -124,7 +150,7 @@ class NewCustomer extends Component {
         // 父组件传来的props
         let { visible, closeModal, jumpReal } = this.props;
         // model里面的props
-        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character } = this.props;
+        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character, name_reg } = this.props;
         // 设置保存请求参数
         let payload = {
             username: name,
@@ -160,7 +186,20 @@ class NewCustomer extends Component {
                 <div className={styles.group_item1}>
                     <span>*</span>
                     <span>姓名：</span>
-                    <Input style={{width: '360px'}} value={name} onChange={e => this.changeName(e)}></Input>
+                    <Input 
+                        placeholder='2~15位中英文大小写，不支持符号' 
+                        className={name_reg ? styles.null : styles.error}
+                        style={{width: '360px'}} 
+                        value={name} 
+                        onChange={e => this.changeName(e.target.value)}
+                        onBlur={e => this.checkName(e.target.value)}
+                        onFocus={() => this.props.dispatch({ type: 'study_customer/setNameReg', payload: true })}
+                    ></Input>
+                    {
+                        name_reg ?
+                        null :
+                        <span style={{marginLeft: '10px', color: 'red'}}>格式不正确</span>
+                    }
                 </div>
                 <div className={styles.group_item2}>
                     <span>性别：</span>
@@ -243,43 +282,53 @@ class NewCustomer extends Component {
                 <div className={styles.group_item11}>
                     <span style={{marginLeft: '10px'}}>年收入：</span>
                     <Select style={{width: '140px'}} value={income} onSelect={value => this.changeIncome(value)}>
-                        <Option value='小于5万'>小于5万</Option>
-                        <Option value='10万'>10万</Option>
-                        <Option value='15万'>15万</Option>
-                        <Option value='20万'>20万</Option>
-                        <Option value='25万'>25万</Option>
-                        <Option value='35万'>35万</Option>
-                        <Option value='40万'>40万</Option>
-                        <Option value='50万'>50万</Option>
-                        <Option value='60万'>60万</Option>
-                        <Option value='70万'>70万</Option>
-                        <Option value='80万'>80万</Option>
-                        <Option value='90万'>90万</Option>
-                        <Option value='100万以上'>100万以上</Option>
+                        <Option value={5}>小于5万</Option>
+                        <Option value={10}>10万</Option>
+                        <Option value={15}>15万</Option>
+                        <Option value={20}>20万</Option>
+                        <Option value={25}>25万</Option>
+                        <Option value={35}>35万</Option>
+                        <Option value={40}>40万</Option>
+                        <Option value={50}>50万</Option>
+                        <Option value={60}>60万</Option>
+                        <Option value={70}>70万</Option>
+                        <Option value={80}>80万</Option>
+                        <Option value={90}>90万</Option>
+                        <Option value={100}>100万以上</Option>
                     </Select>
                     <span style={{marginLeft: '10px', marginRight: '5px'}}>年支出：</span>
                     <Select style={{width: '157px'}} value={cost} onSelect={value => this.changeCost(value)}>
-                        <Option value='小于5万'>小于5万</Option>
-                        <Option value='10万'>10万</Option>
-                        <Option value='15万'>15万</Option>
-                        <Option value='20万'>20万</Option>
-                        <Option value='25万'>25万</Option>
-                        <Option value='35万'>35万</Option>
-                        <Option value='40万'>40万</Option>
-                        <Option value='50万'>50万</Option>
-                        <Option value='60万'>60万</Option>
-                        <Option value='70万'>70万</Option>
-                        <Option value='80万'>80万</Option>
-                        <Option value='90万'>90万</Option>
-                        <Option value='100万以上'>100万以上</Option>
+                        <Option value={5}>小于5万</Option>
+                        <Option value={10}>10万</Option>
+                        <Option value={15}>15万</Option>
+                        <Option value={20}>20万</Option>
+                        <Option value={25}>25万</Option>
+                        <Option value={35}>35万</Option>
+                        <Option value={40}>40万</Option>
+                        <Option value={50}>50万</Option>
+                        <Option value={60}>60万</Option>
+                        <Option value={70}>70万</Option>
+                        <Option value={80}>80万</Option>
+                        <Option value={90}>90万</Option>
+                        <Option value={100}>100万以上</Option>
                     </Select>
                 </div>
                 {/* 底部按钮 */}
                 <Button className={styles.btn1} type={'primary'} onClick={() => jumpReal()}>来自真实客户</Button>
                 <Button 
-                    className={styles.btn2} 
+                    className={styles.btn2}
                     loading={loading}
                     onClick={() => {
+                        // 检测用户是否导入之后进行了修改，没有修改则不让保存
+                        if(this.checkUpdate()) {
+                            return;
+                        };
+                        // 检测名字符不符合要求
+                        if(!NAMEREGEXP.test(name)) {
+                            this.props.dispatch({ type: 'study_customer/setNameReg', payload: false });
+                            return;
+                        }
+                        // 创建新客户——重新拉取数据
                         this.setState({ loading: true })
                         new Promise((resolve) => {
                             this.props.dispatch({type: 'study_customer/createCustomer', payload, resolve,});

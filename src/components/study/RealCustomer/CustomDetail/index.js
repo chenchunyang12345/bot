@@ -9,6 +9,7 @@ class CustomDetail extends Component {
         super(props);
     }
 
+    // 导入的方法
     importDetail() {
         let { display_detail, jumpImport } = this.props;
         let { username, gender, age, profession, maritalStatus, children, income, cost, budget, remarks, disposition, status, identity } = display_detail;
@@ -21,7 +22,7 @@ class CustomDetail extends Component {
                 job: profession,
                 married: maritalStatus,
                 children: children,
-                // health: health,
+                health: '健康',
                 cost: cost,
                 income: income,
                 need: remarks,

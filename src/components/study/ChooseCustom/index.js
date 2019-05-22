@@ -32,9 +32,10 @@ class ChooseCustom extends Component {
         })
         // 设置定时器是避免关闭动画还没结束，表单里面的数据就清空了
         setTimeout(() => {
-            this.props.dispatch({
-                type: 'study_customer/initial',
-            });
+            this.props.dispatch({ type: 'study_customer/initial' });
+            this.props.dispatch({ type: 'study_customer/setSearchName', payload: '' });
+            this.props.dispatch({ type: 'study_customer/setChooseId', payload: -1 });
+            this.props.dispatch({ type: 'study_customer/setNameReg', payload: true });
         }, 500);
     }
 
@@ -59,14 +60,19 @@ class ChooseCustom extends Component {
 
     // 渲染卡片
     renderCard() {
-        let { customers_list } = this.props;
-        return customers_list.map((customer, idx) => {
-            return <CustomCard 
-                        key={idx}
-                        detail={customer}
-                        num={idx + 1}
-                    />
-        })
+        let { customers_list, loading } = this.props;
+        // 判断loading是防止最开始就会出现'未搜索到结果'
+        if(customers_list.length === 0 && !loading.effects['study_customize/getCustomers']) {
+            return <div className={styles.tips}>未搜索到结果</div>;
+        }else {
+            return customers_list.map((customer, idx) => {
+                return <CustomCard 
+                            key={idx}
+                            detail={customer}
+                            num={idx + 1}
+                        />
+            })
+        }
     }
 
     // 改变页码
@@ -134,7 +140,7 @@ class ChooseCustom extends Component {
                             <Option value="1">虚拟客户</Option>
                         </Select>
                         <MySearch 
-                            placeholder="标题／作者／摘要"
+                            placeholder="姓名"
                             value={search_name} 
                             onChange={e => this.setState({search_name: e.target.value})}
                             onKeyDown={e => {
@@ -182,8 +188,8 @@ class ChooseCustom extends Component {
   }
 }
 
-function mapStateToProps({study_customize}) {
-    return {...study_customize};
+function mapStateToProps({study_customize, loading}) {
+    return { ...study_customize, loading };
 }
 
 export default connect(mapStateToProps)(ChooseCustom);

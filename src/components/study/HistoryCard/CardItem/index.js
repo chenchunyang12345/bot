@@ -38,6 +38,8 @@ class CardItem extends Component {
         let { visible } = this.state;
         console.log(detail)
         let { customer, scene } = detail;
+        // 未完成训练的个数
+        let unfinishTotal = detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count;
         return (
             <div className={styles.card_wrap}>
                 <div className={styles[`card_img_${img}`]}>
@@ -58,7 +60,11 @@ class CardItem extends Component {
                 <div className={styles.level}>难度指数：<Level_star level={detail.level} /></div>
                 <Tooltip title={`您有${detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}个训练待完成`}>
                     <a className={styles.btn_history} href={`#/study/history?id=${detail.id}`}>
-                        <div className={styles.budge}>{detail.countList[0].status === "FINISHED" ? detail.countList[1].count : detail.countList[0].count}</div>
+                        {
+                            unfinishTotal === 0 ?
+                            null :
+                            <div className={styles.budge}>{unfinishTotal}</div>
+                        }
                         历史记录
                     </a>
                 </Tooltip>
