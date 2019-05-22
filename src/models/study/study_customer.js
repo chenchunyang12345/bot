@@ -10,7 +10,8 @@ const initialForm = {
     married: 0,
     children: 0,
     health: '健康',
-    income: 112,
+    income: '10万',
+    cost: '5万以下',
     need: '',
     plan: 0,
     process: 0,
@@ -69,6 +70,9 @@ export default {
         },
         setCharacter(state, { payload: character }) {
             return { ...state, character };
+        },
+        setCost(state, { payload: cost }) {
+            return { ...state, cost };
         },
         // 设置真实客户信息
         setRealList(state, { payload: real_list }) {

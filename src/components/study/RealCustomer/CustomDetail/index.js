@@ -11,7 +11,7 @@ class CustomDetail extends Component {
 
     importDetail() {
         let { display_detail, jumpImport } = this.props;
-        let { username, gender, age, profession, maritalStatus, children, income, budget, remarks, disposition, status, identity } = display_detail;
+        let { username, gender, age, profession, maritalStatus, children, income, cost, budget, remarks, disposition, status, identity } = display_detail;
         this.props.dispatch({
             type: 'study_customer/importInfo',
             payload: {
@@ -22,6 +22,7 @@ class CustomDetail extends Component {
                 married: maritalStatus,
                 children: children,
                 // health: health,
+                cost: cost,
                 income: income,
                 need: remarks,
                 plan: budget,

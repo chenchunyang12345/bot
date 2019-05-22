@@ -111,13 +111,20 @@ class NewCustomer extends Component {
             payload: character,
         })
     }
+    // 14、支出
+    changeCost(cost) {
+        this.props.dispatch({
+            type: 'study_customer/setCost',
+            payload: cost,
+        })
+    }
 
     render() {
         let { loading } = this.state;
         // 父组件传来的props
         let { visible, closeModal, jumpReal } = this.props;
         // model里面的props
-        let { name, sex, age, job, married, children, health, income, need, plan, process, agree, character } = this.props;
+        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character } = this.props;
         // 设置保存请求参数
         let payload = {
             username: name,
@@ -128,7 +135,7 @@ class NewCustomer extends Component {
             familyMembers: 3,
             children: children,
             income: income,
-            cost: 0,
+            cost: cost,
             budget: plan,
             identity: agree,
             status: process,
@@ -198,13 +205,11 @@ class NewCustomer extends Component {
                 </div>
                 <div className={styles.group_item6}>
                     <span>健康状况：</span>
-                    <Input style={{width: '140px'}} value={health} onChange={e => this.changeHealth(e.target.value)}></Input>
-                    <span style={{marginLeft: '10px'}}>收入：</span>
-                    <InputNumber style={{width: '174px'}} value={income} onChange={value => this.changeIncome(value)}></InputNumber>
+                    <Input style={{width: '360px'}} value={health} onChange={e => this.changeHealth(e.target.value)}></Input>
                 </div>
                 <div className={styles.tips}>提示：如有疾病请直接填写疾病名称</div>
                 <div className={styles.group_item7}>
-                    <span style={{width: '60px'}}>保险需求：</span>
+                    <span>保险需求：</span>
                     <Input style={{width: '360px'}} value={need} onChange={e => this.changeNeed(e.target.value)}></Input>
                 </div>
                 <div className={styles.group_item8}>
@@ -233,6 +238,40 @@ class NewCustomer extends Component {
                         <Option value="严肃高冷">严肃高冷</Option>
                         <Option value="温和内敛">温和内敛</Option>
                         <Option value="热情开朗">热情开朗</Option>
+                    </Select>
+                </div>
+                <div className={styles.group_item11}>
+                    <span style={{marginLeft: '10px'}}>年收入：</span>
+                    <Select style={{width: '140px'}} value={income} onSelect={value => this.changeIncome(value)}>
+                        <Option value='小于5万'>小于5万</Option>
+                        <Option value='10万'>10万</Option>
+                        <Option value='15万'>15万</Option>
+                        <Option value='20万'>20万</Option>
+                        <Option value='25万'>25万</Option>
+                        <Option value='35万'>35万</Option>
+                        <Option value='40万'>40万</Option>
+                        <Option value='50万'>50万</Option>
+                        <Option value='60万'>60万</Option>
+                        <Option value='70万'>70万</Option>
+                        <Option value='80万'>80万</Option>
+                        <Option value='90万'>90万</Option>
+                        <Option value='100万以上'>100万以上</Option>
+                    </Select>
+                    <span style={{marginLeft: '10px', marginRight: '5px'}}>年支出：</span>
+                    <Select style={{width: '157px'}} value={cost} onSelect={value => this.changeCost(value)}>
+                        <Option value='小于5万'>小于5万</Option>
+                        <Option value='10万'>10万</Option>
+                        <Option value='15万'>15万</Option>
+                        <Option value='20万'>20万</Option>
+                        <Option value='25万'>25万</Option>
+                        <Option value='35万'>35万</Option>
+                        <Option value='40万'>40万</Option>
+                        <Option value='50万'>50万</Option>
+                        <Option value='60万'>60万</Option>
+                        <Option value='70万'>70万</Option>
+                        <Option value='80万'>80万</Option>
+                        <Option value='90万'>90万</Option>
+                        <Option value='100万以上'>100万以上</Option>
                     </Select>
                 </div>
                 {/* 底部按钮 */}
