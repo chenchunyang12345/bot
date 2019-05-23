@@ -107,13 +107,13 @@ class ChooseCustom extends Component {
         })
     }
 
-    handleSearch() {
+    handleSearch(value) {
         let { search_name } = this.state;
         let { customers_type } = this.props;
         this.props.dispatch({
             type: 'study_customize/getCustomers',
             payload: {
-                username: search_name,
+                username: value === '' ? '' : search_name,
                 type: customers_type,
             },
             pagination: {
@@ -139,10 +139,15 @@ class ChooseCustom extends Component {
                             <Option value="0">真实客户</Option>
                             <Option value="1">虚拟客户</Option>
                         </Select>
-                        <MySearch 
+                        <MySearch
                             placeholder="姓名"
-                            value={search_name} 
-                            onChange={e => this.setState({search_name: e.target.value})}
+                            value={search_name}
+                            onChange={e => {
+                                this.setState({search_name: e.target.value});
+                                if(e.target.value === '') {
+                                    this.handleSearch('');
+                                }
+                            }}
                             onKeyDown={e => {
                                 if(e.keyCode === 13) {
                                     e.preventDefault();

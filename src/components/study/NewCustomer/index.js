@@ -150,7 +150,7 @@ class NewCustomer extends Component {
         // 父组件传来的props
         let { visible, closeModal, jumpReal } = this.props;
         // model里面的props
-        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character, name_reg } = this.props;
+        let { name, sex, age, job, married, children, health, income, cost, need, plan, process, agree, character, name_reg, display_detail } = this.props;
         // 设置保存请求参数
         let payload = {
             username: name,
@@ -319,15 +319,15 @@ class NewCustomer extends Component {
                     className={styles.btn2}
                     loading={loading}
                     onClick={() => {
-                        // 检测用户是否导入之后进行了修改，没有修改则不让保存
-                        if(this.checkUpdate()) {
-                            return;
-                        };
                         // 检测名字符不符合要求
                         if(!NAMEREGEXP.test(name)) {
                             this.props.dispatch({ type: 'study_customer/setNameReg', payload: false });
                             return;
                         }
+                        // 检测用户是否导入之后进行了修改，没有修改则不让保存
+                        if(display_detail && this.checkUpdate()) {
+                            return;
+                        };
                         // 创建新客户——重新拉取数据
                         this.setState({ loading: true })
                         new Promise((resolve) => {
