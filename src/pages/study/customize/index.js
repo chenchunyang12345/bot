@@ -48,6 +48,7 @@ class Customize extends Component {
 
     render() {
         let { loading } = this.props;
+        console.log(loading.effects)
         return (
             <div>
                 <div className={styles.header}>

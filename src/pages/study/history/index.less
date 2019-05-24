@@ -69,21 +69,22 @@
 .more {
     text-align: right;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 // 设置加载中的默认高度
 .spin_report {
-    height: 310px;
+    min-height: 310px;
 
     :global(.ant-spin) {
-        height: 310px !important;
+        min-height: 310px !important;
     }
 }
 
 .spin_unfinish {
-    height: 310px;
+    min-height: 310px;
 
     :global(.ant-spin) {
-        height: 310px !important;
+        min-height: 310px !important;
     }
 }

@@ -10,19 +10,23 @@ class ContactList extends Component {
     }
 
     renderList() {
-        let { render_list, choose_id } = this.props;
-        return render_list.map((item, idx) => {
-            return (
-                <div key={idx} className={styles.row}>
-                    <div className={styles.head_img}></div>
-                    <div className={styles.name}>{item.username}</div>
-                    <div 
-                        className={item.id === choose_id ? styles.choose : styles.no_choose}
-                        onClick={() => this.props.dispatch({type: 'study_customer/setChooseId', payload: item.id})}
-                    ></div>
-                </div>
-            )
-        })
+        let { render_list, choose_id, loading } = this.props;
+        if(render_list.length === 0 && !loading.effects['study_customer/getRealCustomers']) {
+            return <div className={styles.tips}>未搜索到结果</div>
+        }else {
+            return render_list.map((item, idx) => {
+                return (
+                    <div key={idx} className={styles.row}>
+                        <div className={styles.head_img}></div>
+                        <div className={styles.name}>{item.username}</div>
+                        <div 
+                            className={item.id === choose_id ? styles.choose : styles.no_choose}
+                            onClick={() => this.props.dispatch({type: 'study_customer/setChooseId', payload: item.id})}
+                        ></div>
+                    </div>
+                )
+            })
+        }
     }
 
     render() {

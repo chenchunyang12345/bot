@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 
-import { Pagination, Select, Button } from 'antd';
+import { Pagination, Select, Button, Icon } from 'antd';
 
 import MySearch from '../../common/mySearch';
 import CustomCard from './CustomCard';
@@ -30,6 +30,13 @@ class ChooseCustom extends Component {
             visible_new: false,
             visible_real: false,
         })
+        // 设置定时器是避免关闭动画还没结束，表单里面的数据就清空了
+        setTimeout(() => {
+            this.props.dispatch({ type: 'study_customer/initial' });
+            this.props.dispatch({ type: 'study_customer/setSearchName', payload: '' });
+            this.props.dispatch({ type: 'study_customer/setChooseId', payload: -1 });
+            this.props.dispatch({ type: 'study_customer/setNameReg', payload: true });
+        }, 500);
     }
 
     // 导入方法
@@ -53,14 +60,19 @@ class ChooseCustom extends Component {
 
     // 渲染卡片
     renderCard() {
-        let { customers_list } = this.props;
-        return customers_list.map((customer, idx) => {
-            return <CustomCard 
-                        key={idx}
-                        detail={customer}
-                        num={idx + 1}
-                    />
-        })
+        let { customers_list, loading } = this.props;
+        // 判断loading是防止最开始就会出现'未搜索到结果'
+        if(customers_list.length === 0 && !loading.effects['study_customize/getCustomers']) {
+            return <div className={styles.tips}>未搜索到结果</div>;
+        }else {
+            return customers_list.map((customer, idx) => {
+                return <CustomCard 
+                            key={idx}
+                            detail={customer}
+                            num={idx + 1}
+                        />
+            })
+        }
     }
 
     // 改变页码
@@ -95,13 +107,13 @@ class ChooseCustom extends Component {
         })
     }
 
-    handleSearch() {
+    handleSearch(value) {
         let { search_name } = this.state;
         let { customers_type } = this.props;
         this.props.dispatch({
             type: 'study_customize/getCustomers',
             payload: {
-                username: search_name,
+                username: value === '' ? '' : search_name,
                 type: customers_type,
             },
             pagination: {
@@ -127,17 +139,30 @@ class ChooseCustom extends Component {
                             <Option value="0">真实客户</Option>
                             <Option value="1">虚拟客户</Option>
                         </Select>
-                        <MySearch 
-                            placeholder="标题／作者／摘要"
-                            value={search_name} 
-                            onChange={e => this.setState({search_name: e.target.value})}
+                        <MySearch
+                            placeholder="姓名"
+                            value={search_name}
+                            onChange={e => {
+                                this.setState({search_name: e.target.value});
+                                if(e.target.value === '') {
+                                    this.handleSearch('');
+                                }
+                            }}
+                            onKeyDown={e => {
+                                if(e.keyCode === 13) {
+                                    e.preventDefault();
+                                    this.handleSearch()
+                                }
+                            }}
                             handleSearch={() => this.handleSearch()}
                         />
                         <Button
                             style={{width: '120px', fontSize: '12px', marginLeft: '20px'}} 
                             type={'primary'}
                             onClick={() => this.setState({visible_new: true})}
-                        >新建客户&nbsp;&nbsp;➕</Button>
+                        >
+                            新建客户<Icon type="plus" />
+                        </Button>
                         {/* 新建客户的信息modal框 */}
                         <NewCustomer 
                             visible={visible_new} 
@@ -170,8 +195,8 @@ class ChooseCustom extends Component {
   }
 }
 
-function mapStateToProps({study_customize}) {
-    return {...study_customize};
+function mapStateToProps({study_customize, loading}) {
+    return { ...study_customize, loading };
 }
 
 export default connect(mapStateToProps)(ChooseCustom);

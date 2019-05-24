@@ -18,8 +18,18 @@ class SearchList extends Component {
                     <MySearch 
                         placeholder="姓名" 
                         value={search_name} 
-                        onChange={e => this.props.dispatch({type: 'study_customer/setSearchName', payload: e.target.value})} 
-                        handleSearch={() => this.props.dispatch({type: 'study_customer/filterSearchName', payload: search_name})}
+                        onChange={e => {
+                            this.props.dispatch({type: 'study_customer/setSearchName', payload: e.target.value});
+                            this.props.dispatch({type: 'study_customer/filterSearchName', payload: e.target.value});
+                        }} 
+                        // 点击搜索按钮再搜索改为了实时搜索
+                        // handleSearch={() => this.props.dispatch({type: 'study_customer/filterSearchName', payload: search_name})}
+                        onKeyDown={e => {
+                            if(e.keyCode === 13) {
+                                e.preventDefault();
+                                this.props.dispatch({type: 'study_customer/filterSearchName', payload: search_name})
+                            }
+                        }}
                     />
                 </div>
                 <div className={styles.list}>

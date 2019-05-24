@@ -11,13 +11,17 @@ class History extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            choose: 1,  // 默认选择的tab
+            choose: 1,          // 默认选择的tab
+            report_idx: 1,      // 报告显示的计算索引值
+            unfinish_idx: 1,    // 未完成显示的索引
         }
     }
 
     // 渲染报告列表
     renderReportList() {
+        let { report_idx } = this.state;
         let { reportList } = this.props;
+        reportList = reportList.slice(0, report_idx * 8);
         return reportList.map((report, idx) => {
             return <ReportCard 
                         key={idx}
@@ -29,7 +33,9 @@ class History extends Component {
 
     // 渲染未完成列表
     renderUnfinishList() {
+        let { unfinish_idx } = this.state;
         let { unfinishList } = this.props;
+        unfinishList = unfinishList.slice(0, unfinish_idx * 8);
         return unfinishList.map((unfinish, idx) => {
             return <UnfinishCard 
                         key={idx}
@@ -39,9 +45,24 @@ class History extends Component {
         })
     }
 
+    // 查看更多
+    seeMore() {
+        let { choose, report_idx, unfinish_idx } = this.state;
+        if(choose === 1) {
+            report_idx++;
+            this.setState({
+                report_idx,
+            })
+        }else {
+            unfinish_idx++;
+            this.setState({
+                unfinish_idx,
+            })
+        }
+    }
+
     render() {
-        console.log(this.props.loading.effects)
-        let { choose } = this.state;
+        let { choose, report_idx, unfinish_idx } = this.state;
         let { reportList, unfinishList, loading } = this.props;
         return (
             <div>
@@ -87,7 +108,15 @@ class History extends Component {
                         </div>
                     </Spin>
                 }
-                <div className={styles.more}>浏览更多&nbsp;></div>
+                {
+                    choose === 1 ? 
+                    (reportList.length / (8 * report_idx) > 1 ? 
+                    <div className={styles.more} onClick={() => this.seeMore()}>浏览更多&nbsp;></div> :
+                    null) :
+                    (unfinishList.length / (8 * unfinish_idx) > 1 ? 
+                    <div className={styles.more} onClick={() => this.seeMore()}>浏览更多&nbsp;></div> :
+                    null)
+                }
             </div>
         )
   }

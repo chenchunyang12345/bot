@@ -29,7 +29,7 @@ class TabsDetail extends Component {
                             })
                         }
                     </TabPane>
-                    <TabPane tab="参考话术" key="2">{detail.recommendWords}</TabPane>
+                    <TabPane tab="参考话术" key="2" style={{lineHeight: '21px'}}>{detail.recommendWords}</TabPane>
                 </Tabs>
             </div>
         )

@@ -77,7 +77,6 @@ class Dm extends Component {
     render() {
         let { visible_leave, input_value } = this.state;
         let { visible_finish, card_detail, session_id } = this.props;
-        console.log(card_detail)
         let { customer, scene } = card_detail;
         return (
             <div className={styles.content}>

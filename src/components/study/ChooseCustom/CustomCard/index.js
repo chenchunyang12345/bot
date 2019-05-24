@@ -61,10 +61,15 @@ class CustomCard extends Component {
                 <div className={styles.head_img}></div>
                 <div className={styles.name}>{detail.username}</div>
                 <div className={styles.detail}>{detail.gender === 'MALE' ? '男' : '女'}<span>|</span>{detail.age}岁<span>|</span>{detail.profession}</div>
-                <div className={styles.delete} onClick={(e) => {
-                    e.stopPropagation();
-                    this.setState({visible: true});
-                }}></div>
+                {
+                    // 真实用户不可以删除
+                    detail.type === "0" ? 
+                    null :
+                    <div className={styles.delete} onClick={(e) => {
+                        e.stopPropagation();
+                        this.setState({visible: true});
+                    }}></div>
+                }
                 <MyModal
                     visible={visible}
                     okType={'danger'}
