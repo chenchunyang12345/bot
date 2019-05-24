@@ -1,8 +1,26 @@
+// 轮播卡片的hover变暗效果
+.toHover(@width, @height) {
+    &:before {
+        content: '';
+        position: absolute;
+        width: @width;
+        height: @height;
+        left: 0px;
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0);
+        transition: all 1s;
+
+    }
+
+    &:hover:before {
+        background-color: rgba(0, 0, 0, .08);
+    }
+}
+
 .card_wrap {
     color: #fff;
     width: 1200px;
     height: 400px;
-    // overflow: hidden;
     font-size: 14px;
 
     &>div {
@@ -15,6 +33,8 @@
         background-size: 100% 100%;
         background-image: url('../../../assets/carousel_bg1.png');
         position: relative;
+        
+        .toHover(600px,400px);
     }
 
     .cardOne_2 {
@@ -23,6 +43,8 @@
         background-size: 100% 100%;
         background-color: #c590ff;
         position: relative;
+
+        .toHover(600px,200px);
     }
 
     .cardOne_3 {
@@ -31,6 +53,8 @@
         background-size: 100% 100%;
         background-color: #80d0d4;
         position: relative;
+
+        .toHover(300px,200px);
     }
 
     .cardOne_4 {
@@ -39,6 +63,8 @@
         background-size: 100% 100%;
         background-color: #fad161;
         position: relative;
+
+        .toHover(300px,200px);
     }
 
     .cardTwo_1 {
@@ -49,11 +75,15 @@
         .start_1 {
             background-image: url('../../../assets/carousel_start3.png') !important;
         }
+
+        .toHover(600px,400px);
     }
 
     .cardTwo_2 {
         .cardOne_2;
         background-color: #c590ff;
+
+        .toHover(600px,200px);
     }
 
     .cardTwo_3 {
@@ -63,6 +93,8 @@
         .start_3 {
             background-image: url('../../../assets/carousel_start4.png') !important;
         }
+
+        .toHover(300px,200px);
     }
 
     .cardTwo_4 {
@@ -72,6 +104,8 @@
         .start_4 {
             background-image: url('../../../assets/carousel_start1.png') !important;
         }
+
+        .toHover(300px,200px);
     }
 
     .cardThree_1 {
@@ -82,6 +116,8 @@
         .start_1 {
             background-image: url('../../../assets/carousel_start4.png') !important;
         }
+
+        .toHover(600px,400px);
     }
 
     .cardThree_2 {
@@ -91,6 +127,8 @@
         .start_2 {
             background-image: url('../../../assets/carousel_start3.png') !important;
         }
+
+        .toHover(600px,200px);
     }
 
     .cardThree_3 {
@@ -100,6 +138,8 @@
         .start_3 {
             background-image: url('../../../assets/carousel_start1.png') !important;
         }
+
+        .toHover(300px,200px);
     }
 
     .cardThree_4 {
@@ -109,6 +149,8 @@
         .start_4 {
             background-image: url('../../../assets/carousel_start2.png') !important;
         }
+
+        .toHover(300px,200px);
     }
 }
 

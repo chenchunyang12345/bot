@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 
-import { Pagination, Select, Button } from 'antd';
+import { Pagination, Select, Button, Icon } from 'antd';
 
 import MySearch from '../../common/mySearch';
 import CustomCard from './CustomCard';
@@ -160,7 +160,9 @@ class ChooseCustom extends Component {
                             style={{width: '120px', fontSize: '12px', marginLeft: '20px'}} 
                             type={'primary'}
                             onClick={() => this.setState({visible_new: true})}
-                        >新建客户&nbsp;&nbsp;➕</Button>
+                        >
+                            新建客户<Icon type="plus" />
+                        </Button>
                         {/* 新建客户的信息modal框 */}
                         <NewCustomer 
                             visible={visible_new} 
