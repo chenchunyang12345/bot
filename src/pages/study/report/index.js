@@ -17,7 +17,6 @@ class Report extends Component {
     render() {
         let { report_detail } = this.props;
         console.log(report_detail)
-        // console.log(moment(1557992282271).format('YYYY/MM/DD'))
         if( report_detail ) {
             let { content, customer, scene } = report_detail;
             return (
@@ -28,9 +27,9 @@ class Report extends Component {
                     </div>
                     {/* 报告banner */}
                     <div className={styles.banner}>
-                        <div className={styles.title}>对话训练评测报告</div>
+                        <div className={styles.banner_title}>对话训练评测报告</div>
                         <div className={styles.line}></div>
-                        <div className={styles.date}>2019/04/29</div>
+                        <div className={styles.date}>{moment(report_detail.createTime).format('YYYY/MM/DD')}</div>
                     </div>
                     {/* 场景回顾 */}
                     <div className={styles.scene}>
@@ -56,7 +55,7 @@ class Report extends Component {
                     </div>
                     {/* 评价 */}
                     <div className={styles.score}>
-                        <div className={styles.score_title}>场景回顾</div>
+                        <div className={styles.score_title}>综合评价</div>
                         <div className={styles.score_content}>
                             <div className={styles.content_top}>
                                 <div className={styles.score_left}>
