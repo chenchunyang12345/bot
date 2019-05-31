@@ -8,8 +8,8 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            left: '-100%',  // 左边图片的偏移量（滑动效果）
-            show: 2,      // 1为登录，2为注册
+            left: '0px',  // 左边图片的偏移量（滑动效果）
+            show: 1,      // 1为登录，2为注册
         }
         this.jump = this.jump.bind(this);
     }

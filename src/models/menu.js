@@ -1,7 +1,7 @@
 export default {
     namespace: 'menu',
     state: {
-        current: 'home',    // 当前导航栏选中项
+        current: '',    // 当前导航栏选中项
     },
     reducers: {
         handleClick(state, { payload: current }) {

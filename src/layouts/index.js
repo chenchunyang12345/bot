@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
-import router from 'umi/router';
 
-import { Menu, Tooltip } from 'antd';
+import { Menu, Dropdown } from 'antd';
+
+import MyModal from '../components/common/modal';
+import PassWordForm from './PassWordForm';
 
 class BasicLayout extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            visible: false, // 控制修改密码的显隐
+        }
     }
 
     // 渲染行程消息
@@ -34,22 +39,25 @@ class BasicLayout extends Component {
     // }
 
     // 鼠标移入导航栏头像
-    renderTips() {
+    renderMenu() {
+        let { handleClick } = this.props;
         return (
-            <ul>
-                <li>基本信息</li>
-                <li>修改密码</li>
-                <li onClick={() => this.loginOut()}>退出登录</li>
-            </ul>
+            <Menu>
+                <Menu.Item>
+                    <a href="#/info" onClick={() => handleClick('info')}>基本信息</a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a href="javascript: void(0);" onClick={() => this.setState({visible: true})}>修改密码</a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a href="#/login">退出登录</a>
+                </Menu.Item>
+            </Menu>
         )
     }
 
-    // 退出登录
-    loginOut() {
-        router.push('/login');
-    }
-
     render() {
+        let { visible } = this.state;
         // 如果路由里面存在login，用另一个layout
         if(location.hash.indexOf('login') !== -1) {
             return <div style={{width: '100%', height: '100%'}}>{this.props.children}</div>
@@ -59,15 +67,11 @@ class BasicLayout extends Component {
                 <div className={styles.wrap_page}>
                     <div className={styles.nav}>
                         {/* 头像 */}
-                        <Tooltip
-                            overlayClassName={styles.head_tooltip}
-                            placement='rightTop'
-                            title={this.renderTips()}
-                        >
-                            <div className={styles.user}>
+                        <Dropdown overlayClassName={styles.head_menu} overlay={this.renderMenu()}>
+                            <div className={styles.user} ref='user'>
                                 <div className={styles.dots}>.&nbsp;.&nbsp;.</div>
                             </div>
-                        </Tooltip>
+                        </Dropdown>
                         {/* 菜单 */}
                         <Menu
                             onClick={e => handleClick(e.key)}
@@ -104,6 +108,16 @@ class BasicLayout extends Component {
                             {this.props.children}
                         </div>
                     </div>
+                    <MyModal
+                        visible={visible}
+                        okText={'确认'}
+                        cancelText={'取消'}
+                        onCancel={() => this.setState({visible: false})}
+                        onClose={() => this.setState({visible: false})}
+                        maskClosable={false}
+                    >
+                        <PassWordForm></PassWordForm>
+                    </MyModal>
                 </div>
             )
         }
@@ -122,11 +136,11 @@ function mapDispatchToProps(dispatch) {
                 payload: key
             })
         },
-        clearMessage: () => {
-            dispatch({
-                type: 'message/clearMessage',
-            })
-        }
+        // clearMessage: () => {
+        //     dispatch({
+        //         type: 'message/clearMessage',
+        //     })
+        // }
     }
 }
 

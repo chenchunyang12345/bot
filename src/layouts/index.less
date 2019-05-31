@@ -71,7 +71,7 @@
 
 .inner {
     width: 1200px;
-    margin: 54px auto 0;
+    margin: 0 auto;
 }
 
 // 消息的气泡
@@ -128,37 +128,31 @@
     }
 }
 
-// 头像的气泡
-.head_tooltip {
-    font-size: 14px;
-    left: 74px !important;
+// 头像的菜单
+.head_menu {
+    position: fixed;
+    width: 100px;
+    top: 53px !important;
+    left: 82px !important;
 
-    :global(.ant-tooltip-arrow) {
-        display: none;
-    }
+    :global(.ant-dropdown-menu) {
+        width: 80px;
+        background-color: #4A4A4A;
+        
+        :global(.ant-dropdown-menu-item-active) {
+            background-color: #4A4A4A;
+        }
 
-    :global(.ant-tooltip-inner) {
-        padding: 8px 13px;
+        a {
+            color: #fff;
 
-        ul {
-            margin: 0;
-
-            li {
-                line-height: 20px;
-                margin-bottom: 10px;
-
-                &:hover {
-                    color: #6387FF;
-                    cursor: pointer;
-                }
-            }
-    
-            li:nth-last-child(1) {
-                margin-bottom: 0;
+            &:hover {
+                color: #6387FF;
             }
         }
     }
 }
+
 
 // nav图标默认及选中样式
 .nav {
