@@ -32,7 +32,7 @@ export default {
             // 先在最上面插入时间背景
             let customerName = state.card_detail.customer.username;
             let time = moment(state.card_detail.createTime).format('YYYY年MM月DD日HH时mm分ss秒');
-            let word = `${time}经客户介绍的${customerName}已经接通了您的电话`;
+            let word = `${time}，经客户介绍的${customerName}已经接通了您的电话`;
             talk_history.push({ num: 3, word, });
             payload.forEach((item, idx) => {
                 talk_history.push({ num: 1, word: item.query });
@@ -58,7 +58,7 @@ export default {
                 // 更新对话，添加时间背景
                 let customerName = yield select(state => state.study_dm.card_detail.customer.username);
                 let time = moment().format('YYYY年MM月DD日HH时mm分ss秒');
-                let word = `${time}经客户介绍的${customerName}已经接通了您的电话`;
+                let word = `${time}，经客户介绍的${customerName}已经接通了您的电话`;
                 yield put({ type: 'updateTalk', payload: word, num: 3 })
             }
         },

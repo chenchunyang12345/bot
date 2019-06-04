@@ -43,7 +43,7 @@ class CarouselBot extends Component {
                 <div className={styles.carousel_container}>
                     <Carousel 
                         dots={false}
-                        autoplay={true}
+                        // autoplay={true}
                         ref={el => {this.changeIndex = el}}
                     >
                         <div className={styles.card_wrap}>

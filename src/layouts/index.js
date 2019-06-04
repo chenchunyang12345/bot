@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
+import Link from 'umi/link';
 
 import { Menu, Dropdown } from 'antd';
 
@@ -44,13 +45,13 @@ class BasicLayout extends Component {
         return (
             <Menu>
                 <Menu.Item>
-                    <a href="#/info" onClick={() => handleClick('info')}>基本信息</a>
+                    <Link to="/info" onClick={() => handleClick('info')}>基本信息</Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <a href="javascript: void(0);" onClick={() => this.setState({visible: true})}>修改密码</a>
+                    <a onClick={() => this.setState({visible: true})}>修改密码</a>
                 </Menu.Item>
                 <Menu.Item>
-                    <a href="#/login">退出登录</a>
+                    <Link to="/login">退出登录</Link>
                 </Menu.Item>
             </Menu>
         )
@@ -79,18 +80,20 @@ class BasicLayout extends Component {
                             mode='vertical'
                         >
                             <Menu.Item key='message'>
-                                <a href='#/message' className={styles.nav_message}></a>
+                                <Link to='/message' className={styles.nav_message}></Link>
                             </Menu.Item>
                             <Menu.Item key='phonebook'>
-                                <a href='#/phonebook' className={styles.nav_phonebook}></a>
+                                <Link to='/phonebook' className={styles.nav_phonebook}></Link>
                             </Menu.Item>
                             <Menu.Item key='work'>
-                                <a href='#/work' className={styles.nav_work}></a>
+                                <Link to='/work' className={styles.nav_work}></Link>
                             </Menu.Item>
                             <Menu.Item key='study'>
-                                <a href='#/study' className={styles.nav_study}></a>
+                                <Link to='/study' className={styles.nav_study}></Link>
                             </Menu.Item>
                         </Menu>
+                        {/* logo */}
+                        <div class={styles.logo}></div>
                         {/* <Popover
                             placement='bottomRight' 
                             trigger='hover'
@@ -108,6 +111,7 @@ class BasicLayout extends Component {
                             {this.props.children}
                         </div>
                     </div>
+                    {/* 修改密码 */}
                     <MyModal
                         visible={visible}
                         okText={'确认'}
@@ -115,6 +119,8 @@ class BasicLayout extends Component {
                         onCancel={() => this.setState({visible: false})}
                         onClose={() => this.setState({visible: false})}
                         maskClosable={false}
+                        // 设置位置
+                        style={{top: '18%'}}
                     >
                         <PassWordForm></PassWordForm>
                     </MyModal>

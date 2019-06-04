@@ -14,7 +14,7 @@ class Study extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{position: 'relative'}}>
                 {/* 面包屑 */}
                 <div className={styles.breadcrumb}>
                     <div className={styles.inner}>
@@ -41,13 +41,15 @@ class Study extends Component {
                         <HistoryCard></HistoryCard>
                     </div>
                 </div>
+                {/* 轮播图下的背景 */}
+                <div className={styles.carousel_bg}></div>
             </div>
         )
   }
 }
 
 function mapStateToProps({ study }) {
-    return {...study};
+    return { ...study };
 }
 
 export default connect(mapStateToProps)(Study);

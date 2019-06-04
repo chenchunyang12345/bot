@@ -3,10 +3,12 @@ import styles from './index.less';
 import { connect } from 'dva';
 import moment from 'moment';
 
-import { Progress, Spin, Tag } from 'antd';
+import { Spin, Tag } from 'antd';
 
 import { CheckTalk } from '../../../components/study';
+import CanvasScore from '../../../components/common/canvasScore';
 
+// 定义标签的颜色
 const tagColor = ['purple', 'cyan', 'magenta', 'gold', 'green'];
 
 class Report extends Component {
@@ -61,13 +63,27 @@ class Report extends Component {
                                 <div className={styles.score_left}>
                                     <div className={styles.left_text}>智能评分</div>
                                     <div className={styles.left_img}>
-                                        <Progress type='circle' percent={content.score} format={percent => `${percent}`} strokeColor='#80CFD4'></Progress>
+                                        <CanvasScore 
+                                            id='canvas1' 
+                                            width={120}
+                                            height={120}
+                                            score={content.score}
+                                            fillColor='#ECF8F9'
+                                            borderColor='#80CFD4'
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.score_right}>
                                     <div className={styles.right_text}>知识点掌握率</div>
                                     <div className={styles.right_img}>
-                                        <Progress type='circle' percent={content.masteryRate} format={percent => `${percent}`} strokeColor='#FAD060'></Progress>
+                                        <CanvasScore 
+                                            id='canvas2'
+                                            width={120}
+                                            height={120}
+                                            score={content.masteryRate}
+                                            fillColor='#FFF8E7'
+                                            borderColor='#FAD060'
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +124,7 @@ class Report extends Component {
 }
 
 function mapStateToProps({ study_report }) {
-    return {...study_report};
+    return { ...study_report };
 }
 
 export default connect(mapStateToProps)(Report);
