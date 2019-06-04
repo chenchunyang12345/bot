@@ -32,6 +32,8 @@ class CustomDetail extends Component {
                 character: disposition,
             }
         });
+        // 更新输入姓名框为正确
+        this.props.dispatch({ type: 'study_customer/setNameReg', payload: true });
         // 设置完值再跳转到新建窗口
         jumpImport();
     }

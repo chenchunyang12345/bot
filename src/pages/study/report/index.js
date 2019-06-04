@@ -3,10 +3,12 @@ import styles from './index.less';
 import { connect } from 'dva';
 import moment from 'moment';
 
-import { Progress, Spin, Tag } from 'antd';
+import { Spin, Tag } from 'antd';
 
 import { CheckTalk } from '../../../components/study';
+import CanvasScore from '../../../components/common/canvasScore';
 
+// 定义标签的颜色
 const tagColor = ['purple', 'cyan', 'magenta', 'gold', 'green'];
 
 class Report extends Component {
@@ -17,7 +19,6 @@ class Report extends Component {
     render() {
         let { report_detail } = this.props;
         console.log(report_detail)
-        // console.log(moment(1557992282271).format('YYYY/MM/DD'))
         if( report_detail ) {
             let { content, customer, scene } = report_detail;
             return (
@@ -28,9 +29,9 @@ class Report extends Component {
                     </div>
                     {/* 报告banner */}
                     <div className={styles.banner}>
-                        <div className={styles.title}>对话训练评测报告</div>
+                        <div className={styles.banner_title}>对话训练评测报告</div>
                         <div className={styles.line}></div>
-                        <div className={styles.date}>2019/04/29</div>
+                        <div className={styles.date}>{moment(report_detail.createTime).format('YYYY/MM/DD')}</div>
                     </div>
                     {/* 场景回顾 */}
                     <div className={styles.scene}>
@@ -56,19 +57,33 @@ class Report extends Component {
                     </div>
                     {/* 评价 */}
                     <div className={styles.score}>
-                        <div className={styles.score_title}>场景回顾</div>
+                        <div className={styles.score_title}>综合评价</div>
                         <div className={styles.score_content}>
                             <div className={styles.content_top}>
                                 <div className={styles.score_left}>
                                     <div className={styles.left_text}>智能评分</div>
                                     <div className={styles.left_img}>
-                                        <Progress type='circle' percent={content.score} format={percent => `${percent}`} strokeColor='#80CFD4'></Progress>
+                                        <CanvasScore 
+                                            id='canvas1' 
+                                            width={120}
+                                            height={120}
+                                            score={content.score}
+                                            fillColor='#ECF8F9'
+                                            borderColor='#80CFD4'
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.score_right}>
                                     <div className={styles.right_text}>知识点掌握率</div>
                                     <div className={styles.right_img}>
-                                        <Progress type='circle' percent={content.masteryRate} format={percent => `${percent}`} strokeColor='#FAD060'></Progress>
+                                        <CanvasScore 
+                                            id='canvas2'
+                                            width={120}
+                                            height={120}
+                                            score={content.masteryRate}
+                                            fillColor='#FFF8E7'
+                                            borderColor='#FAD060'
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +124,7 @@ class Report extends Component {
 }
 
 function mapStateToProps({ study_report }) {
-    return {...study_report};
+    return { ...study_report };
 }
 
 export default connect(mapStateToProps)(Report);

@@ -1,0 +1,67 @@
+.wrap {
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+
+    .title {
+        height: 99px;
+        color: #333;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // 正中移到偏下
+        position: relative;
+        top: 15px;
+
+        &:before {
+            content: '';
+            width: 15px;
+            height: 16px;
+            background-image: url('../../assets/info.png');
+            background-size: 100% 100%;
+            margin-right: 10px;
+        }
+    }
+
+    .form {
+        border-top: 2px solid rgba(220, 220, 224, 0.5);
+        width: 1200px;
+
+        .row {
+            width: 604px;
+            margin: 0 auto;
+
+            div:nth-child(1) {
+                margin-top: 35px;
+                margin-bottom: 30px;
+            }
+            
+            .my_input {
+                width: 604px;
+            }
+        }
+
+        .btns {
+            margin-top: 150px;
+            padding-bottom: 35px;
+            width: 1200px;
+            bottom: 32px;
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 71px;
+                height: 27px;
+
+                span {
+                    font-size: 12px;
+                }
+            }
+
+            button:nth-child(1) {
+                margin-right: 20px;
+            }
+        }
+    }
+}

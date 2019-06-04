@@ -1,86 +1,72 @@
 .wrap_page {
+    display: flex;
 
-    .header {
-        width: 100%;
-        height: 54px;
+    .nav {
+        width: 70px;
+        height: 100vh;
+        position: fixed;
         background-color: #fff;
-        
-        .inner {
-            height: 54px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            
-            .logo {
-                width: 100px;
-                height: 27px;
-                background-image: url('../assets/logo.png');
-                overflow: hidden;
-    
-                h1 {
-                    width: 0;
-                    height: 0;
-                    text-indent: 9999em;
+        padding-top: 53px;
+
+        .user {
+            width: 47px;
+            height: 47px;
+            background-image: url('../assets/contact_head3.png');
+            background-size: 100% 100%;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+
+            .dots {
+                color: #C2C2C6;
+                font-size: 20px;
+                line-height: 20px;
+                font-weight: bold;
+                position: absolute;
+                left: 11px;
+                top: 38px;
+            }
+        }
+
+        :global(.ant-menu) {
+            border: none;
+
+            :global(.ant-menu-item) {
+                margin-top: 30px;
+                padding: 0;
+
+                a {
+                    font-size: 16px;
+                    color: #777;
+
+                    &:hover {
+                        color: #6387FF;
+                    }
                 }
             }
 
-            .nav {
-                display: flex;
-                align-items: center;
-                position: relative;
+            :global(.ant-menu-item-selected) {
 
-                :global(.ant-menu-horizontal) {
-                    border: none;
-
-                    :global(.ant-menu-item) {
-                        padding-top: 4px;
-                        padding-bottom: 4px;
-                        margin: 0 4px;
-
-                        a {
-                            font-size: 16px;
-                            color: #777;
-
-                            &:hover {
-                                color: #6387FF;
-                            }
-                        }
-                    }
-
-                    :global(.ant-menu-item-selected) {
-
-                        border-color: #6387FF;
-                        a {
-                            color: #6387FF;
-                        }
-                    }
-                }
-
-                .message {
-                    width: 14px;
-                    height: 14px;
-                    background-image: url('../assets/message.png');
-                    background-size: 100% 100%;
-                    margin-right: 15px;
-                    margin-left: 20px;
-                }
-
-                .budge {
-                    width: 12px;
-                    height: 12px;
-                    background-color: #FE4F4C;
-                    color: #fff;
-                    font-size: 12px;
-                    line-height: 12px;
-                    text-align: center;
-                    border-radius: 50%;
-                    position: absolute;
-                    right: 6px;
-                    top: 12px;
+                border-color: #6387FF;
+                a {
+                    color: #6387FF;
                 }
             }
         }
-  }
+
+        // .message {
+        //     width: 14px;
+        //     height: 14px;
+        //     background-image: url('../assets/message.png');
+        //     background-size: 100% 100%;
+        //     margin-right: 15px;
+        //     margin-left: 20px;
+        // }
+    }
+
+    .content {
+        flex: 1;
+    }
 }
 
 .inner {
@@ -140,5 +126,99 @@
             }
         }
     }
+}
 
+// 头像的菜单
+.head_menu {
+    position: fixed;
+    width: 100px;
+    top: 53px !important;
+    left: 82px !important;
+
+    :global(.ant-dropdown-menu) {
+        width: 80px;
+        background-color: #4A4A4A;
+        
+        :global(.ant-dropdown-menu-item-active) {
+            background-color: #4A4A4A;
+        }
+
+        a {
+            color: #fff;
+
+            &:hover {
+                color: #6387FF;
+            }
+        }
+    }
+}
+
+
+// nav图标默认及选中样式
+.nav {
+    position: relative;
+
+    // 默认的样式
+    .nav_message {
+        width: 100%;
+        height: 100%;
+        background-image: url('../assets/nav_message.png');
+        background-size: 16px 14px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .nav_phonebook {
+        .nav_message;
+        background-size: 16px 16px;
+        background-image: url('../assets/nav_phonebook.png');
+    }
+
+    .nav_work {
+        .nav_message;
+        background-size: 16px 16px;
+        background-image: url('../assets/nav_work.png');
+    }
+
+    .nav_study {
+        .nav_message;
+        background-size: 14px 16px;
+        background-image: url('../assets/nav_study.png');
+    }
+
+    // 选择后的样式(根据css权重)
+    :global(.ant-menu-item-selected) {
+        border-left: 3px solid #6387FF;
+        background-color: #fff !important;
+
+        .nav_message {
+            .nav_message;
+            background-image: url('../assets/nav_message_active.png');
+        }
+
+        .nav_phonebook {
+            .nav_phonebook;
+            background-image: url('../assets/nav_phonebook_active.png');
+        }
+
+        .nav_work {
+            .nav_work;
+            background-image: url('../assets/nav_work_active.png');
+        }
+
+        .nav_study {
+            .nav_study;
+            background-image: url('../assets/nav_study_active.png');
+        }
+    }
+
+    .logo {
+        position: absolute;
+        left: 12px;
+        bottom: 26px;
+        width: 45px;
+        height: 10px;
+        background-image: url('../assets/logo.png');
+        background-size: 100% 100%;
+    }
 }

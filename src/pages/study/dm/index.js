@@ -47,6 +47,8 @@ class Dm extends Component {
                     return <AskMsg word={item.word} key={idx} />;
                 case 2: 
                     return <AnsMsg word={item.word} key={idx} />;
+                case 3: 
+                    return <MsgTips word={item.word} key={idx} />;
             }
         })
     }

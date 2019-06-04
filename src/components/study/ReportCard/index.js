@@ -3,6 +3,7 @@ import styles from './index.less';
 import { connect } from 'dva';
 
 import classnames from 'classnames';
+import moment from 'moment';
 import MyModal from '../../common/modal';
 
 class ReportCard extends Component {
@@ -47,7 +48,7 @@ class ReportCard extends Component {
                 <div className={styles.delete} onClick={() => this.setState({visible: true})}></div>
                 <div className={styles[`img${num % 8 === 0 ? 8 : num % 8}`]}></div>
                 <div className={styles.score}>{detail.score}分</div>
-                <div className={styles.date}>{detail.createTime}</div>
+                <div className={styles.date}>{moment(detail.createTime).format('YYYY年MM月DD日 HH : MM')}</div>
                 <a href={`#/study/report?id=${detail.sessionId}`} className={styles.my_btn}>我的报告</a>
                 {/* 确认框 */}
                 <MyModal
