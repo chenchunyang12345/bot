@@ -67,10 +67,23 @@ async function getDataAndTotal(url, method, body) {
   return { ...data, headers: headers };
 }
 
+// 测试的
+function requestTest(url, method, body) {
+  return fetch('http://192.168.201.206:8090' + url, {
+    method,
+    body: JSON.stringify(body),
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization':'eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJleHBUaW1lIjoiMjAxOS0wNS0xNCAxODo0ODowMyIsImlkIjoxLCJ1c2VybmFtZSI6ImFkbWluIn0.vKOjqIWnNraYzzsPh7pbpq8SRCu2iAbLy0GjSxAp22wNVo2modvbbQDMT0uEr-dO_PokvyAANHUUWv3rTYwmvQ',
+    }
+  }).then(checkStatus).then(parseJSON).then(data => ({ data })).catch(err => ({ err }));
+}
+
 export default {
   get: url => request(url, 'GET'),
   post: (url, body) => request(url, 'POST', body),
   put: (url, body) => request(url, 'PUT', body),
   del: (url, body) => request(url, 'DELETE', body),
   getDataAndTotal: (url, method, body) => getDataAndTotal(url, method, body),
+  getTest: url => requestTest(url, 'GET'),
 };

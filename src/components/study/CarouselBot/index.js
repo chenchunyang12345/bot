@@ -212,7 +212,7 @@ class CarouselBot extends Component {
 }
 
 function mapStateToProps({ study }) {
-    return {...study};
+    return { ...study };
 }
 
 export default connect(mapStateToProps)(CarouselBot);

@@ -9,6 +9,7 @@ export default {
         talk_history: [],
         visible_finish: false,
         card_detail: {},
+        step_number: 0,     // 当前进行到的步骤序号
     },
     reducers: {
         setSessionId(state, { payload: session_id }) {

@@ -11,7 +11,7 @@ export default {
     },
     subscriptions: {
         setup({ dispatch, history }) {
-            console.log(history)
+            
         }
     }
 }

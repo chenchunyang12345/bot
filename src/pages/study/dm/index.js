@@ -2,8 +2,78 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 import router from 'umi/router';
+import { Steps } from 'antd';
+
+const { Step } = Steps;
 
 import { Spin } from 'antd';
+
+// 所有步骤点
+const ALLSTEPS = [
+    {
+        "name": "接洽",
+        "type": "single"
+    },
+    {
+        "name": "方便异议",
+        "type": "single"
+
+    },
+    {
+        "name": "目的",
+        "type": "single"
+
+    },
+    {
+        "name": "时间/地点",
+        "type": "multiple"
+    },
+    {
+        "name": "时间异议/地点异议",
+        "type": "multiple"
+    },
+    {
+        "name": "总结",
+        "type": "single"
+    }
+]
+
+const NOWSTEPS = [
+    {
+        "name": "接洽",
+        "type": "single",
+    },
+    {
+        "name": "方便异议",
+        "type": "single",
+        "times":"3"
+    },
+    {
+        "name": "目的",
+        "type": "single"
+    },
+    {
+        "name": "时间/地点",
+        "type": "multiple",
+        "chosen": "时间"
+    },
+    {
+        "name":"时间异议/地点异议",
+        "type":"multiple",
+        "chosen":"时间异议",
+        "times":"2"
+    },
+    {
+        "name":"时间/地点",
+        "type":"multiple",
+        "chosen":"地点"
+    },
+]
+
+const CURRENTSTATE = {
+    "name": "时间/地点",
+    "type": "multiple"
+}
 
 // 引入对话框中的3种组件
 import { MsgTips, AskMsg, AnsMsg } from '../../../components/study';
@@ -72,6 +142,67 @@ class Dm extends Component {
         })
     }
 
+    // 渲染进度条
+    renderSteps() {
+        let { step_number } = this.props;
+        return (
+            <Steps direction="vertical" size="small" current={3}>
+                {
+                    ALLSTEPS.map((step, idx) => {
+                        return (
+                            step.type === 'single' ? 
+                            <Step key={idx} title={this.renderSinger(step.name)} /> :
+                            <Step key={idx} title={this.renderMultipleTitle(step.name)} />
+                        )
+                    })
+                }
+            </Steps>
+        )
+    }
+
+    // 渲染单个的title(为了处理times)
+    renderSinger(name) {
+        let pass;   // 定义是否经过
+        NOWSTEPS.forEach((step, idx) => {
+            if(step.name === name) {
+                pass = step.times && step.times > 1 ? step.times : 0;     // 没有times或times等于1则pass为0， times大于1则pass为times
+            }
+        })
+        return (
+            <div>
+                {/* pass不为0和undefined则渲染 */}
+                {name}{pass ? '(' + pass + ')' : null}      
+            </div>
+        )
+    }
+
+    // 渲染多选的进度条title
+    renderMultipleTitle(name) {
+        let newArr = name.split('/');   // 变成数组
+        let arrBoolean = [];            // 声明映射数组(根据布尔值决定渲染的样式)
+        let arrTimes = [];              // 声明次数映射数组
+        newArr.forEach((item, idx) => {
+            NOWSTEPS.forEach((step, idx2) => {
+                if(step.name === name && step.chosen === item) {
+                    arrBoolean[idx] = true;
+
+                    if(step.times) {
+                        arrTimes[idx] = step.times;
+                    }
+                }
+            })
+        })
+        return (
+            newArr.map((item, arr_idx) => {
+                return (
+                    <div key={arr_idx} className={arrBoolean[arr_idx] ? styles.pass : styles.nopass}>
+                        {item}{arrTimes[arr_idx] ? '(' + arrTimes[arr_idx] + ')' : null}
+                    </div>
+                )
+            })
+        )
+    }
+
     componentDidUpdate() {
         this.refs.content.scrollTop = 99999;
     }
@@ -82,6 +213,10 @@ class Dm extends Component {
         let { customer, scene } = card_detail;
         return (
             <div className={styles.content}>
+                {/* 固定定位进度条 */}
+                <div className={styles.steps}>
+                    { this.renderSteps() }
+                </div>
                 {/* 页面左 */}
                 <div className={styles.left}>
                     <div className={styles.back}>

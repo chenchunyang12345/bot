@@ -208,3 +208,37 @@
     .star_fill;
     background-image: url('../../../assets/star.png');
 }
+
+// 进度条
+.steps {
+    width: 114px;
+    position: fixed;
+    top: 42px;
+    right: calc((100vw - 1270px - 250px) / 4);  // （屏幕宽 - inner宽和左侧导航）再除以2得到两侧margin宽度再除以2得到两侧margin值的一半
+
+    :global(.ant-steps-item) {
+        height: 60px;
+
+    }
+
+    // 完成的字体颜色
+    :global(.ant-steps-item-finish) {
+
+        :global(.ant-steps-item-title) {
+            color: rgb(103, 138, 252) !important;
+        }
+    }
+
+    // 所有状态的标题字体颜色
+    :global(.ant-steps-item-title) {
+        padding-right: 0;
+
+        .pass {
+            color: rgb(103, 138, 252) !important;
+        }
+
+        .nopass {
+            color: rgba(0, 0, 0, 0.45) !important;
+        }
+    }
+}

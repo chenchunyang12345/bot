@@ -51,6 +51,9 @@ class BasicLayout extends Component {
                     <a onClick={() => this.setState({visible: true})}>修改密码</a>
                 </Menu.Item>
                 <Menu.Item>
+                    <Link to="/scene" onClick={() => handleClick('scene')}>场景点图</Link>
+                </Menu.Item>
+                <Menu.Item>
                     <Link to="/login">退出登录</Link>
                 </Menu.Item>
             </Menu>
@@ -93,7 +96,7 @@ class BasicLayout extends Component {
                             </Menu.Item>
                         </Menu>
                         {/* logo */}
-                        <div class={styles.logo}></div>
+                        <div className={styles.logo}></div>
                         {/* <Popover
                             placement='bottomRight' 
                             trigger='hover'

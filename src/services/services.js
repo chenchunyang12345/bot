@@ -1,4 +1,4 @@
-const { get, post, put, del, getDataAndTotal } = require('../utils/request').default;
+const { get, post, put, del, getDataAndTotal, getTest } = require('../utils/request').default;
 
 export default {
     // 导航栏
@@ -41,5 +41,9 @@ export default {
         talk: ({ id, payload }) => post(`/dialog/session/${id}`, payload),
         getHistory: ({ id }) => get(`/history/list/${id}`),
         getCardInfo: ({ id }) => get(`/task/card/detail/${id}`),
+    },
+    // 场景点图
+    scene: {
+        getScenePointInfo: () => getTest(`/user/scene/graph/find/by/type?type=test`)
     }
 }
