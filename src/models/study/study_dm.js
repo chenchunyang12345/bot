@@ -10,6 +10,8 @@ export default {
         visible_finish: false,
         card_detail: {},
         step_number: 0,     // 当前进行到的步骤序号
+        all_steps: [],      // 所有的步骤点
+        now_steps: [],      // 现在的步骤点
     },
     reducers: {
         setSessionId(state, { payload: session_id }) {
@@ -43,6 +45,23 @@ export default {
         },
         setCard_detail(state, { payload: card_detail }) {
             return { ...state, card_detail };
+        },
+        setAllSteps(state, { payload: all_steps }) {
+            return { ...state, all_steps };
+        },
+        setNowStepNumber(state, { payload }) {    // payload: {name: "接洽", type: "single"}
+        console.log(payload)
+            let num;
+            // 当前步骤对象去所有步骤点里面查是第几个
+            state.all_steps.forEach((step, idx) => {
+                if(JSON.stringify(step) === JSON.stringify(payload)) {
+                    num = idx;
+                }
+            })
+            return { ...state, step_number: num };
+        },
+        setNowSteps(state, { payload: now_steps }) {
+            return { ...state, now_steps };
         }
     },
     effects: {
@@ -50,7 +69,6 @@ export default {
             // message.loading('正在开启对话功能...', 0);
             const res = yield call(services.study_dm['openSession'], { id });
             if(res.err) {
-                console.log(res)
                 message.error('开启对话失败', 2);
             } else {
                 message.success('开启对话成功', 2);
@@ -61,6 +79,15 @@ export default {
                 let time = moment().format('YYYY年MM月DD日HH时mm分ss秒');
                 let word = `${time}，经客户介绍的${customerName}已经接通了您的电话`;
                 yield put({ type: 'updateTalk', payload: word, num: 3 })
+                // 默认发送一条信息去获得初始化关键点信息
+                const init_res = yield call(services.study_dm['talk'], { id: res.data.msg.id, payload: {'query': '初始化'} });
+                if(init_res.err) {
+                    message.error('初始化关键点信息失败', 2);
+                } else {
+                    yield put({ type: 'setAllSteps', payload: init_res.data.msg.instructions[0].params.all_node });
+                    yield put({ type: 'setNowStepNumber', payload: init_res.data.msg.instructions[0].params.currentState });
+                    yield put({ type: 'setNowSteps', payload: init_res.data.msg.instructions[0].params.walked });
+                }
             }
         },
         *talk({ id, payload }, { call, put, select }) {
@@ -74,6 +101,15 @@ export default {
             if(res.err) {
                 message.error('对话失败', 2);
             } else {
+                // 返回对象里面找到拿到需要的字段‘process’, 并触发对应reducer
+                let obj;
+                res.data.msg.instructions.forEach((item, idx) => {
+                    if(item.type === 'process') {
+                        obj = item.params;
+                    }
+                })
+                yield put({ type: 'setNowStepNumber', payload: obj.currentState });
+                yield put({ type: 'setNowSteps', payload: obj.walked });
                 // 对话结束弹出查看报告modal
                 if(res.data.msg.instructions[0].params.title === '结束') {
                     yield put({ type: 'setVisible', payload: true });
@@ -91,6 +127,35 @@ export default {
             } else {
                 yield put({ type: 'setSessionId', payload: id });
                 yield put({ type: 'initializeTalk', payload: res.data.msg });
+                // 初始化关键点信息
+                const initHistoryRes = yield call(services.study_dm['getHistoryPoint'], { id });
+                if(initHistoryRes.err) {
+                    message.error('获取历史关键点信息失败', 2);
+                } else {
+                    // 判断initHistoryRes中的数据是否为null
+                    if(!initHistoryRes.data.msg) {
+                        // 默认发送一条信息去获得初始化关键点信息
+                        const init_res = yield call(services.study_dm['talk'], { id: id, payload: {'query': '初始化'} });
+                        if(init_res.err) {
+                            message.error('初始化关键点信息失败', 2);
+                        } else {
+                            let obj;
+                            init_res.data.msg.instructions.forEach((item, idx) => {
+                                if(item.type === 'process') {
+                                    obj = item.params;
+                                }
+                            })
+                            yield put({ type: 'setAllSteps', payload: obj.all_node });
+                            yield put({ type: 'setNowStepNumber', payload: obj.currentState });
+                            yield put({ type: 'setNowSteps', payload: obj.walked });
+                        }
+                    } else {
+                        let data = initHistoryRes.data.msg;
+                        yield put({ type: 'setAllSteps', payload: data.all_node });
+                        yield put({ type: 'setNowStepNumber', payload: data.currentState });
+                        yield put({ type: 'setNowSteps', payload: data.walked });
+                    }
+                }
             }
         },
         *getCardInfo({ id, resolve, reject }, { call, put }) {

@@ -51,7 +51,7 @@ class BasicLayout extends Component {
                     <a onClick={() => this.setState({visible: true})}>修改密码</a>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to="/scene" onClick={() => handleClick('scene')}>场景点图</Link>
+                    <Link to="/scene" onClick={() => handleClick('scene')}>培训进度</Link>
                 </Menu.Item>
                 <Menu.Item>
                     <Link to="/login">退出登录</Link>
@@ -66,7 +66,7 @@ class BasicLayout extends Component {
         if(location.hash.indexOf('login') !== -1) {
             return <div style={{width: '100%', height: '100%'}}>{this.props.children}</div>
         } else {
-            let { current, handleClick, message_list } = this.props;
+            let { current, handleClick, message_list, deleteProgress } = this.props;
             return (
                 <div className={styles.wrap_page}>
                     <div className={styles.nav}>
@@ -96,7 +96,7 @@ class BasicLayout extends Component {
                             </Menu.Item>
                         </Menu>
                         {/* logo */}
-                        <div className={styles.logo}></div>
+                        <div className={styles.logo} onClick={() => deleteProgress()}></div>
                         {/* <Popover
                             placement='bottomRight' 
                             trigger='hover'
@@ -150,6 +150,11 @@ function mapDispatchToProps(dispatch) {
         //         type: 'message/clearMessage',
         //     })
         // }
+        deleteProgress: () => {
+            dispatch({
+                type: 'scene/deleteProgress',
+            })
+        }
     }
 }
 

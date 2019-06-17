@@ -41,9 +41,12 @@ export default {
         talk: ({ id, payload }) => post(`/dialog/session/${id}`, payload),
         getHistory: ({ id }) => get(`/history/list/${id}`),
         getCardInfo: ({ id }) => get(`/task/card/detail/${id}`),
+        // 继续之前对话时，获取关键步骤信息的接口
+        getHistoryPoint: ({ id }) => get(`/session/detail/sessionId/${id}`),
     },
     // 场景点图
     scene: {
-        getScenePointInfo: () => getTest(`/user/scene/graph/find/by/type?type=test`)
+        getScenePointInfo: () => get(`/user/scene/graph/find/by/type?type=电话预约`),
+        deleteProgress: () => del(`/user/scene/graph/delete/2`)
     }
 }

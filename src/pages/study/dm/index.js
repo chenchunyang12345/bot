@@ -7,73 +7,72 @@ import { Steps } from 'antd';
 const { Step } = Steps;
 
 import { Spin } from 'antd';
+// // 所有步骤点
+// const ALLSTEPS = [
+//     {
+//         "name": "接洽",
+//         "type": "single"
+//     },
+//     {
+//         "name": "方便异议",
+//         "type": "single"
 
-// 所有步骤点
-const ALLSTEPS = [
-    {
-        "name": "接洽",
-        "type": "single"
-    },
-    {
-        "name": "方便异议",
-        "type": "single"
+//     },
+//     {
+//         "name": "目的",
+//         "type": "single"
 
-    },
-    {
-        "name": "目的",
-        "type": "single"
+//     },
+//     {
+//         "name": "时间/地点",
+//         "type": "multiple"
+//     },
+//     {
+//         "name": "时间异议/地点异议",
+//         "type": "multiple"
+//     },
+//     {
+//         "name": "总结",
+//         "type": "single"
+//     }
+// ]
 
-    },
-    {
-        "name": "时间/地点",
-        "type": "multiple"
-    },
-    {
-        "name": "时间异议/地点异议",
-        "type": "multiple"
-    },
-    {
-        "name": "总结",
-        "type": "single"
-    }
-]
+// const NOWSTEPS = [
+//     {
+//         "name": "接洽",
+//         "type": "single",
+//     },
+//     {
+//         "name": "方便异议",
+//         "type": "single",
+//         "times":"3"
+//     },
+//     {
+//         "name": "目的",
+//         "type": "single"
+//     },
+//     {
+//         "name": "时间/地点",
+//         "type": "multiple",
+//         "chosen": "时间"
+//     },
+//     {
+//         "name":"时间异议/地点异议",
+//         "type":"multiple",
+//         "chosen":"时间异议",
+//         "times":"2"
+//     },
+//     {
+//         "name":"时间/地点",
+//         "type":"multiple",
+//         "chosen":"地点"
+//     },
+// ]
 
-const NOWSTEPS = [
-    {
-        "name": "接洽",
-        "type": "single",
-    },
-    {
-        "name": "方便异议",
-        "type": "single",
-        "times":"3"
-    },
-    {
-        "name": "目的",
-        "type": "single"
-    },
-    {
-        "name": "时间/地点",
-        "type": "multiple",
-        "chosen": "时间"
-    },
-    {
-        "name":"时间异议/地点异议",
-        "type":"multiple",
-        "chosen":"时间异议",
-        "times":"2"
-    },
-    {
-        "name":"时间/地点",
-        "type":"multiple",
-        "chosen":"地点"
-    },
-]
-
-const CURRENTSTATE = {
-    "name": "时间/地点",
-    "type": "multiple"
-}
+// const CURRENTSTATE = {
+//     "name": "时间/地点",
+//     "type": "multiple"
+// }
 
 // 引入对话框中的3种组件
 import { MsgTips, AskMsg, AnsMsg } from '../../../components/study';
@@ -144,11 +143,11 @@ class Dm extends Component {
 
     // 渲染进度条
     renderSteps() {
-        let { step_number } = this.props;
+        let { step_number, all_steps } = this.props;
         return (
-            <Steps direction="vertical" size="small" current={3}>
+            <Steps direction="vertical" size="small" current={step_number}>
                 {
-                    ALLSTEPS.map((step, idx) => {
+                    all_steps.map((step, idx) => {
                         return (
                             step.type === 'single' ? 
                             <Step key={idx} title={this.renderSinger(step.name)} /> :
@@ -162,8 +161,9 @@ class Dm extends Component {
 
     // 渲染单个的title(为了处理times)
     renderSinger(name) {
+        let { now_steps } = this.props;
         let pass;   // 定义是否经过
-        NOWSTEPS.forEach((step, idx) => {
+        now_steps.forEach((step, idx) => {
             if(step.name === name) {
                 pass = step.times && step.times > 1 ? step.times : 0;     // 没有times或times等于1则pass为0， times大于1则pass为times
             }
@@ -178,11 +178,12 @@ class Dm extends Component {
 
     // 渲染多选的进度条title
     renderMultipleTitle(name) {
-        let newArr = name.split('/');   // 变成数组
+        let { now_steps } = this.props;
+        let newArr = name.split('和');   // 变成数组
         let arrBoolean = [];            // 声明映射数组(根据布尔值决定渲染的样式)
         let arrTimes = [];              // 声明次数映射数组
         newArr.forEach((item, idx) => {
-            NOWSTEPS.forEach((step, idx2) => {
+            now_steps.forEach((step, idx2) => {
                 if(step.name === name && step.chosen === item) {
                     arrBoolean[idx] = true;
 
