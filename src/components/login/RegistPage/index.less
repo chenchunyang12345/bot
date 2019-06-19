@@ -23,6 +23,7 @@
     .form {
 
         .user {
+            position: relative;
 
             div:nth-child(1) {
                 .form_title;
@@ -31,6 +32,15 @@
         }
 
         .call {
+            position: relative;
+
+            div:nth-child(1) {
+                .form_title;
+            }
+        }
+
+        .code {
+            position: relative;
 
             div:nth-child(1) {
                 .form_title;
@@ -38,6 +48,7 @@
         }
 
         .password {
+            position: relative;
 
             div:nth-child(1) {
                 .form_title;
@@ -90,4 +101,20 @@
     line-height: 25px;
     margin-bottom: 30px;
     margin-top: 35px;
+}
+
+// 错误提示
+.err_tips {
+    position: absolute;
+    left: 0;
+    bottom: -28px;
+    color: #E72B00;
+}
+
+// 验证码错误提示
+.code_err_tips {
+    position: absolute;
+    color: #E72B00;
+    bottom: 12px;
+    left: 278px;
 }

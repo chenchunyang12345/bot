@@ -3,7 +3,7 @@ import styles from './index.less';
 import { connect } from 'dva';
 import classnames from 'classnames';
 
-import MyModal from '../../../common/modal';
+import MyModal from '../../../common/MyModal';
 
 class CustomCard extends Component {
     constructor(props) {

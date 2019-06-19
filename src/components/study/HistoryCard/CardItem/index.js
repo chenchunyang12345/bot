@@ -4,7 +4,7 @@ import { connect } from 'dva';
 
 import { Tooltip } from 'antd';
 
-import MyModal from '../../../common/modal';
+import MyModal from '../../../common/MyModal';
 
 // 渲染难度的组件
 const Level_star = (props) => {

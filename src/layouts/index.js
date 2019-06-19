@@ -5,7 +5,7 @@ import Link from 'umi/link';
 
 import { Menu, Dropdown } from 'antd';
 
-import MyModal from '../components/common/modal';
+import MyModal from '../components/common/MyModal';
 import PassWordForm from './PassWordForm';
 
 class BasicLayout extends Component {

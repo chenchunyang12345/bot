@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 
-import MyInput from '../../components/common/myInput';
+import MyInput from '../../components/common/MyInput';
 
 // 图标
 import pass_icon from '../../assets/login_password.png';

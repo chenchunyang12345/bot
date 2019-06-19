@@ -77,7 +77,7 @@ import { Spin } from 'antd';
 // 引入对话框中的3种组件
 import { MsgTips, AskMsg, AnsMsg } from '../../../components/study';
 // 提示框
-import MyModal from '../../../components/common/modal';
+import MyModal from '../../../components/common/MyModal';
 
 // 难度系数的组件
 const Level = (props) => {
@@ -165,7 +165,7 @@ class Dm extends Component {
         let pass;   // 定义是否经过
         now_steps.forEach((step, idx) => {
             if(step.name === name) {
-                pass = step.times && step.times > 1 ? step.times : 0;     // 没有times或times等于1则pass为0， times大于1则pass为times
+                pass = step.times && step.times > 0 ? step.times : 0;     // 没有times或times等于1则pass为0， times大于1则pass为times
             }
         })
         return (

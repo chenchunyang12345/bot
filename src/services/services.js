@@ -48,5 +48,13 @@ export default {
     scene: {
         getScenePointInfo: () => get(`/user/scene/graph/find/by/type?type=电话预约`),
         deleteProgress: () => del(`/user/scene/graph/delete/2`)
-    }
+    },
+    // 登陆相关
+    login_page: {
+        login: ({ payload }) => post(`/user/login`, payload),
+    },
+    // 注册相关
+    regist_page: {
+        checkUsername: ({ payload }) => post(`/user/check/username`, payload), 
+    },
 }

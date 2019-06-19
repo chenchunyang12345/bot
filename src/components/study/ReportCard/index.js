@@ -4,7 +4,7 @@ import { connect } from 'dva';
 
 import classnames from 'classnames';
 import moment from 'moment';
-import MyModal from '../../common/modal';
+import MyModal from '../../common/MyModal';
 
 class ReportCard extends Component {
     constructor(props) {

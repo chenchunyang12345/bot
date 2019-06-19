@@ -3,7 +3,7 @@ import styles from './index.less';
 
 class MyInput extends Component {
     render() {
-        let { placeholder, className, prefix, icon_width, icon_height } = this.props;
+        let { type, placeholder, className, prefix, icon_width, icon_height, onChange, value, onBlur } = this.props;
         return (
             <div className={className} style={{position: 'relative', borderBottom: '2px solid #DCDEE3'}}>
                 {/* 如果同时传递了图片的宽度和长度，就设置图片为传递的 */}
@@ -12,10 +12,13 @@ class MyInput extends Component {
                     <img src={prefix} className={styles.img} style={{width: icon_width, height: icon_height}}/> :
                     <img src={prefix} className={styles.img}/>
                 }
-                <input 
-                    type="text" 
+                <input
+                    type={type ? type : 'text'}
                     className={styles.my_input}
                     placeholder={placeholder}
+                    onChange={e => onChange(e)}
+                    value={value}
+                    onBlur={onBlur}
                 ></input>
             </div>
         );

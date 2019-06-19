@@ -4,12 +4,19 @@ import styles from './index.less';
 // 引入登录注册组件
 import { LoginPage, RegistPage } from '../../components/login';
 
+// 缩放样式（兼容firefox）
+const scaleStyle = {
+    zoom : 1,
+    MozTransform : 'scale(1)',
+    MozTransformOrigin : 'center center',    // 缩放点为正中心
+}
+
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             left: '0px',  // 左边图片的偏移量（滑动效果）
-            show: 1,      // 1为登录，2为注册
+            show: 2,      // 1为登录，2为注册
         }
         this.jump = this.jump.bind(this);
     }
@@ -36,6 +43,7 @@ class Login extends Component {
     }
 
     render() {
+        let WINDOWHEIGHT = window.document.documentElement.clientHeight;
         let { left } = this.state;
         return (
             <div className={styles.wrap}>
@@ -45,7 +53,7 @@ class Login extends Component {
                         <div className={styles.bg2}></div>
                     </div>
                 </div>
-                <div className={styles.right}>
+                <div className={styles.right} style={WINDOWHEIGHT < 950 ? scaleStyle : {}}>
                     <div className={styles.box}>
                         {
                             this.renderContent()

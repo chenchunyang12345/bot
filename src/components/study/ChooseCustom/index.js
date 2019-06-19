@@ -4,7 +4,7 @@ import { connect } from 'dva';
 
 import { Pagination, Select, Button, Icon } from 'antd';
 
-import MySearch from '../../common/mySearch';
+import MySearch from '../../common/MySearch';
 import CustomCard from './CustomCard';
 import NewCustomer from '../NewCustomer';
 import RealCustomer from '../RealCustomer';

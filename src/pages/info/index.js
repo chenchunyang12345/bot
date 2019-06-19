@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.less';
 import { Button } from 'antd';
-import MyInput from '../../components/common/myInput';
+import MyInput from '../../components/common/MyInput';
 
 // 引入输入框前缀图片
 import user_icon from '../../assets/login_user.png';

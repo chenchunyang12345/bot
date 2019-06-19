@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Spin, Tag } from 'antd';
 
 import { CheckTalk } from '../../../components/study';
-import CanvasScore from '../../../components/common/canvasScore';
+import CanvasScore from '../../../components/common/CanvasScore';
 
 // 定义标签的颜色
 const tagColor = ['purple', 'cyan', 'magenta', 'gold', 'green'];

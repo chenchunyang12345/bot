@@ -7,10 +7,14 @@ function parseJSON(response) {
 }
 
 function checkStatus(response) {
+  // 200 - 300
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
+  // 400 - 401
+  if(response.status === 400 || response.status === 401) {
+    return response;
+  }
   const error = new Error(response.statusText);
   error.response = response;
   throw error;

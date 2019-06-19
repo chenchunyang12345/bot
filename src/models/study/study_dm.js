@@ -50,7 +50,6 @@ export default {
             return { ...state, all_steps };
         },
         setNowStepNumber(state, { payload }) {    // payload: {name: "接洽", type: "single"}
-        console.log(payload)
             let num;
             // 当前步骤对象去所有步骤点里面查是第几个
             state.all_steps.forEach((step, idx) => {

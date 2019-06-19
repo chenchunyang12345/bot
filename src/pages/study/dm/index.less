@@ -214,7 +214,7 @@
     width: 114px;
     position: fixed;
     top: 42px;
-    right: calc((100vw - 1270px - 250px) / 4);  // （屏幕宽 - inner宽和左侧导航）再除以2得到两侧margin宽度再除以2得到两侧margin值的一半
+    right: calc((100vw - 1270px - 230px) / 4);  // （屏幕宽 - inner宽和左侧导航）再除以2得到两侧margin宽度再除以2得到两侧margin值的一半
 
     :global(.ant-steps-item) {
         height: 60px;
@@ -240,5 +240,9 @@
         .nopass {
             color: rgba(0, 0, 0, 0.45) !important;
         }
+    }
+
+    :global(.ant-steps-item-icon) {
+        margin-right: 5px;
     }
 }

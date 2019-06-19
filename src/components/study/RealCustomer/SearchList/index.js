@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.less';
 import { connect } from 'dva';
 
-import MySearch from '../../../common/mySearch';
+import MySearch from '../../../common/MySearch';
 import ContactList from './ContactList';
 
 class SearchList extends Component {
